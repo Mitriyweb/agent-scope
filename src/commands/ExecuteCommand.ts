@@ -13,16 +13,19 @@ export class ExecuteCommand implements Command {
     const timeout = options.timeout as number | undefined;
 
     if (!agentName) {
-      throw new Error('--agent is required');
+      console.error('✗ --agent is required');
+      process.exit(1);
     }
 
     if (!command) {
-      throw new Error('--command is required');
+      console.error('✗ --command is required');
+      process.exit(1);
     }
 
     const configPath = await AgentRegistry.findConfigFile();
     if (!configPath) {
-      throw new Error('agents.json not found. Run "agent-scope init" first.');
+      console.error('✗ agents.json not found. Run "agent-scope init" first.');
+      process.exit(1);
     }
 
     const registry = new AgentRegistry(configPath);
@@ -30,9 +33,10 @@ export class ExecuteCommand implements Command {
 
     const agent = registry.getAgent(agentName);
     if (!agent) {
-      throw new Error(
-        `Agent "${agentName}" not found. Run "agent-scope agent add --name ${agentName} --role <role> --scope <scope>" to add it.`
+      console.error(
+        `✗ Agent "${agentName}" not found. Run "agent-scope agent add --name ${agentName} --role <role> --scope <scope>" to add it.`
       );
+      process.exit(1);
     }
 
     const engine = new ExecutionEngine();

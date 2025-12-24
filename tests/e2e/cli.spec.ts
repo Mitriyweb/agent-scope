@@ -129,11 +129,13 @@ describe('CLI E2E Tests', (): void => {
       try {
         execSync(
           `cd ${testDir} && node ${process.cwd()}/bin/agent-scope execute --agent developer --command "echo test"`,
-          { encoding: 'utf-8' }
+          { encoding: 'utf-8', stdio: 'pipe' }
         );
       } catch (error) {
         const stderr = (error as { stderr?: Buffer }).stderr?.toString() || '';
+        expect(stderr).toContain('✗');
         expect(stderr).toContain('agent add');
+        expect(stderr).toContain('developer');
       }
     });
   });
