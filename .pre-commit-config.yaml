@@ -35,3 +35,10 @@ repos:
         language: system
         pass_filenames: false
         stages: [commit]
+
+      - id: test
+        name: Run tests
+        entry: npm run test
+        language: system
+        pass_filenames: false
+        stages: [commit]

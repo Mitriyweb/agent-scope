@@ -12,8 +12,8 @@ describe('getVersion', (): void => {
     expect(semverRegex.test(version)).toBe(true);
   });
 
-  it('should return version 0.0.1', (): void => {
+  it('should return version 0.1.0', (): void => {
     const version = getVersion();
-    expect(version).toBe('0.0.1');
+    expect(version).toBe('0.1.0');
   });
 });

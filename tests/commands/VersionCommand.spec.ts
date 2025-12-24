@@ -32,6 +32,6 @@ describe('VersionCommand', (): void => {
     command.execute();
 
     const output = consoleLogSpy.mock.calls[0][0];
-    expect(output).toBe('agent-scope v0.0.1');
+    expect(output).toBe('agent-scope v0.1.0');
   });
 });

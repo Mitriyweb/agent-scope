@@ -56,4 +56,21 @@ export class AgentRegistry {
   hasAgent(name: string): boolean {
     return this.agents.has(name);
   }
+
+  static async findConfigFile(startDir: string = process.cwd()): Promise<string | undefined> {
+    let currentDir = startDir;
+    while (currentDir !== path.parse(currentDir).root) {
+      const configPath = path.join(currentDir, 'agents.json');
+      try {
+        await fs.access(configPath);
+        return configPath;
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+          throw error;
+        }
+      }
+      currentDir = path.dirname(currentDir);
+    }
+    return undefined;
+  }
 }

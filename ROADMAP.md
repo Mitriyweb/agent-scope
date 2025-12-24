@@ -72,7 +72,7 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 2.5 — Agent execution & IDE integration
+## Phase 1.5 — Agent execution & IDE integration
 
 **Goal:** Enable agents to run with isolated contexts and integrate with IDEs.
 
