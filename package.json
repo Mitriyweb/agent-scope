@@ -1,0 +1,29 @@
+{
+  "name": "agent-scope",
+  "version": "0.0.1",
+  "description": "Agent Scope",
+  "author": "Mitriyweb <mitriyweb@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mitriyweb/agent-scope"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:md": "markdownlint-cli2 --fix \"**/*.md\"",
+    "lint:js": "eslint --fix .",
+    "lint": "npm run format && npm run lint:md && npm run lint:js",
+    "knip": "knip",
+    "audit": "npm audit --audit-level=moderate",
+    "precommit": "npm run lint && npm run knip && npm run audit",
+    "prepare": "prek install"
+  },
+  "devDependencies": {
+    "@j178/prek": "0.2.24",
+    "eslint": "9.39.2",
+    "knip": "5.38.2",
+    "markdownlint-cli2": "0.20.0",
+    "prettier": "3.7.4"
+  }
+}

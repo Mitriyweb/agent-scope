@@ -1,0 +1,37 @@
+repos:
+  - repo: local
+    hooks:
+      - id: format
+        name: Format with Prettier
+        entry: npm run format
+        language: system
+        pass_filenames: false
+        stages: [commit]
+
+      - id: lint-md
+        name: Lint Markdown
+        entry: npm run lint:md
+        language: system
+        pass_filenames: false
+        stages: [commit]
+
+      - id: lint-js
+        name: Lint JavaScript
+        entry: npm run lint:js
+        language: system
+        pass_filenames: false
+        stages: [commit]
+
+      - id: knip
+        name: Check unused dependencies
+        entry: npm run knip
+        language: system
+        pass_filenames: false
+        stages: [commit]
+
+      - id: audit
+        name: Security audit
+        entry: npm audit --audit-level=high
+        language: system
+        pass_filenames: false
+        stages: [commit]
