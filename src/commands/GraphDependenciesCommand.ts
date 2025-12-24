@@ -6,7 +6,9 @@ export class GraphDependenciesCommand {
     try {
       this.displayDependencyGraph(depth);
     } catch (error) {
-      console.error(`Error generating dependency graph: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(
+        `Error generating dependency graph: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 

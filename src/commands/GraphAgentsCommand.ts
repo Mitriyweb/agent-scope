@@ -5,7 +5,9 @@ export class GraphAgentsCommand {
     try {
       this.displayAgentGraph(roleFilter);
     } catch (error) {
-      console.error(`Error generating agent graph: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(
+        `Error generating agent graph: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 
@@ -19,7 +21,7 @@ export class GraphAgentsCommand {
       { id: 'reviewer', role: 'reviewer', connections: [] },
     ];
 
-    const filtered = roleFilter ? agents.filter((a) => a.role === roleFilter) : agents;
+    const filtered = roleFilter ? agents.filter(a => a.role === roleFilter) : agents;
 
     for (const agent of filtered) {
       console.log(`[${agent.id}] (${agent.role})`);

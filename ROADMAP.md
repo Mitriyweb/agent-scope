@@ -72,20 +72,20 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 1.5 — Agent execution & IDE integration 
+## Phase 1.5 — Agent execution & IDE integration
 
 **Goal:** Enable agents to run with isolated contexts and integrate with IDEs.
 
 **Status:** COMPLETE
 
-### Agent execution engine 
+### Agent execution engine
 
 - [x] Process-based agent execution with isolated contexts
 - [x] Execution state management (pending, running, completed, failed)
 - [x] Execution logging and result tracking
 - [x] Timeout and cancellation support
 
-### Context isolation 
+### Context isolation
 
 - [x] Filesystem isolation based on scope patterns
 - [x] Environment variable isolation per agent
@@ -186,7 +186,7 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 **Status:** Completed Dec 24, 2025
 
-### CLI commands ✅
+### CLI Commands ✅
 
 - [x] `agent-scope explain flow` - Display flow overview, nodes, edges
 - [x] `agent-scope explain agent` - Display agent details and capabilities
@@ -209,7 +209,7 @@ The roadmap is actionable: items can be checked off as they are completed.
 - [x] Template manager for scaffolding
 - [x] Preset manager for loading
 
-### Testing & quality ✅
+### Code Quality ✅
 
 - [x] 60+ unit tests (246 total passing)
 - [x] Integration tests for all commands

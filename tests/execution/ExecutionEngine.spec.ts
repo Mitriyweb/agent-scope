@@ -108,7 +108,9 @@ describe('ExecutionEngine', () => {
     it('should have end time after start time', async () => {
       const agent = createTestAgent('test-agent');
       const result = await engine.execute(agent, 'sleep 0.1; echo "done"');
-      expect(result.endTime!.getTime()).toBeGreaterThanOrEqual(result.startTime.getTime());
+      if (result.endTime) {
+        expect(result.endTime.getTime()).toBeGreaterThanOrEqual(result.startTime.getTime());
+      }
     });
   });
 

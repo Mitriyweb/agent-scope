@@ -38,7 +38,7 @@ export class PresetManager {
 
   listPresets(type?: 'role' | 'flow'): Preset[] {
     const all = Object.values(this.presets);
-    return type ? all.filter((p) => p.type === type) : all;
+    return type ? all.filter(p => p.type === type) : all;
   }
 
   getPreset(name: string): Preset | undefined {

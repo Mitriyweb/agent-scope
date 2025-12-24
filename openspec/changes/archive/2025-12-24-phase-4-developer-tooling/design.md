@@ -18,7 +18,6 @@ Phase 3 delivered DAG-based flows and artifact management. Phase 4 focuses on de
 - Real-time execution monitoring (Phase 5)
 - IDE plugins (Phase 1.5 follow-up)
 
-
 ## Decisions
 
 ### 1. ASCII Graph Rendering
@@ -94,16 +93,12 @@ Example fix:
   Or add intermediate node: analyzer → validator → processor
 ```
 
-
 ## Risks / Trade-offs
 
-| Risk                                      | Mitigation                                     |
-|-------------------------------------------|------------------------------------------------|
-| ASCII graphs may be hard to read for large flows | Provide `--format json` option for programmatic use |
-| Templates may become outdated            | Version templates, include update instructions |
-| Presets may not match user needs         | Allow easy customization and override          |
-| Error messages may be too verbose        | Add `--quiet` flag to suppress suggestions     |
-
+- **ASCII graphs readability**: Provide `--format json` option for programmatic use
+- **Templates outdated**: Version templates, include update instructions
+- **Presets mismatch**: Allow easy customization and override
+- **Verbose errors**: Add `--quiet` flag to suppress suggestions
 
 ## Migration Plan
 

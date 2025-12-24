@@ -23,7 +23,9 @@ export class ExplainRoleCommand {
         this.displayAgents(roleName);
       }
     } catch (error) {
-      console.error(`Error explaining role: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(
+        `Error explaining role: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 

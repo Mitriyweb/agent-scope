@@ -1,4 +1,5 @@
 import type { CommandType } from '@/enums/CommandType';
+import ExecutionStatus from '@/types/ExecutionStatus';
 
 export interface CliOptions {
   command: CommandType | null;
@@ -8,3 +9,5 @@ export interface CliOptions {
 export interface CommandHandler {
   execute(): void;
 }
+
+export { ExecutionStatus };

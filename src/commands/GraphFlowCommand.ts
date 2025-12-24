@@ -23,7 +23,9 @@ export class GraphFlowCommand {
         this.displayAsAscii(flow, showLabels);
       }
     } catch (error) {
-      console.error(`Error generating graph: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(
+        `Error generating graph: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 
@@ -35,7 +37,7 @@ export class GraphFlowCommand {
       const node = flow.nodes[nodeId];
       console.log(`[${nodeId}] ${node.agentName}`);
 
-      const outgoing = flow.edges.filter((e) => e.from === nodeId);
+      const outgoing = flow.edges.filter(e => e.from === nodeId);
       for (const edge of outgoing) {
         const label = showLabels ? ` (${edge.artifact})` : '';
         console.log(`  └─${label} ──> [${edge.to}]`);
@@ -50,9 +52,9 @@ export class GraphFlowCommand {
       nodes: Object.entries(flow.nodes).map(([id, node]) => ({
         id,
         agent: node.agentName,
-        inputs: node.inputs || {},
+        inputs: node.inputs ?? {},
       })),
-      edges: flow.edges.map((edge) => ({
+      edges: flow.edges.map(edge => ({
         from: edge.from,
         to: edge.to,
         artifact: edge.artifact,

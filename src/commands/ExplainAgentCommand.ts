@@ -15,7 +15,9 @@ export class ExplainAgentCommand {
         this.displayCapabilities(agentName);
       }
     } catch (error) {
-      console.error(`Error explaining agent: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(
+        `Error explaining agent: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 

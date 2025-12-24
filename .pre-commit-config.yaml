@@ -7,6 +7,7 @@ repos:
         language: system
         pass_filenames: false
         stages: [commit]
+        always_run: true
 
       - id: lint-md
         name: Lint Markdown
@@ -14,6 +15,7 @@ repos:
         language: system
         pass_filenames: false
         stages: [commit]
+        always_run: true
 
       - id: lint-js
         name: Lint JavaScript
@@ -21,6 +23,7 @@ repos:
         language: system
         pass_filenames: false
         stages: [commit]
+        always_run: true
 
       - id: knip
         name: Check unused dependencies
@@ -28,6 +31,7 @@ repos:
         language: system
         pass_filenames: false
         stages: [commit]
+        always_run: true
 
       - id: audit
         name: Security audit
@@ -35,20 +39,15 @@ repos:
         language: system
         pass_filenames: false
         stages: [commit]
+        always_run: true
 
-      - id: test
-        name: Run tests
-        entry: npm run test
-        language: system
-        pass_filenames: false
-        stages: [commit]
-
-      - id: coverage
+      - id: test-with-coverage
         name: Check test coverage
         entry: npm run test:coverage
         language: system
         pass_filenames: false
         stages: [commit]
+        always_run: true
 
       - id: coverage-check
         name: Validate coverage baseline
@@ -56,3 +55,4 @@ repos:
         language: system
         pass_filenames: false
         stages: [commit]
+        always_run: true

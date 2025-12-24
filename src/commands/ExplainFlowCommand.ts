@@ -29,7 +29,9 @@ export class ExplainFlowCommand {
         this.displayEdges(flow);
       }
     } catch (error) {
-      console.error(`Error explaining flow: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(
+        `Error explaining flow: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 

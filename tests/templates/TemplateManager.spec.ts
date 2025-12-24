@@ -30,7 +30,7 @@ describe('TemplateManager', () => {
     const template = manager.getTemplate('basic-flow');
 
     expect(template?.files).toBeDefined();
-    expect(Object.keys(template?.files || {}).length).toBeGreaterThan(0);
+    expect(Object.keys(template?.files ?? {}).length).toBeGreaterThan(0);
   });
 
   it('should create project from template', () => {
