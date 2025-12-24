@@ -29,6 +29,9 @@
     "precommit": "npm run build && npm run test:coverage && node scripts/precommit-coverage.js && npm run lint && npm run knip && npm run audit",
     "prepare": "prek install"
   },
+  "dependencies": {
+    "tsconfig-paths": "4.2.0"
+  },
   "devDependencies": {
     "@j178/prek": "0.2.24",
     "@types/jest": "29.5.11",

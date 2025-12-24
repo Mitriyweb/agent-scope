@@ -9,7 +9,9 @@ Usage:
   agent-scope [command] [options]
 
 Commands:
+  init              Initialize project configuration
   build             Build agents and flows for distribution
+  execute           Execute an agent with isolated context
   help              Show this help message
   version           Show version number
 
@@ -17,13 +19,10 @@ Options:
   --help, -h        Show help
   --version, -v     Show version
 
-Build Command:
-  agent-scope build
-    Compiles agents and flows based on agent-scope.build.json configuration.
-    Outputs artifacts to dist/ directory in JSON format.
-
 Examples:
+  agent-scope init
   agent-scope build
+  agent-scope execute --agent <name> --command <cmd>
   agent-scope --help
   agent-scope --version
 `);

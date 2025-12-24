@@ -17,18 +17,23 @@ module.exports = [
     },
   },
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['tests/**/*.ts', 'tests/**/*.tsx'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: true,
-        tsconfigRootDir: process.cwd(),
+        ecmaVersion: 'latest',
+        sourceType: 'module',
       },
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
     },
     rules: {
+      // Disable rules that require parserServices for test files
+      '@typescript-eslint/prefer-nullish-coalescing': 'off',
+      '@typescript-eslint/prefer-optional-chain': 'off',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+
       // Strict TypeScript enforcement
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': [
@@ -39,9 +44,6 @@ module.exports = [
         },
       ],
       '@typescript-eslint/no-non-null-assertion': 'error',
-      '@typescript-eslint/prefer-nullish-coalescing': 'error',
-      '@typescript-eslint/prefer-optional-chain': 'error',
-      '@typescript-eslint/no-unnecessary-type-assertion': 'error',
 
       // Naming conventions
       '@typescript-eslint/naming-convention': [
@@ -68,11 +70,11 @@ module.exports = [
     },
   },
   {
-    files: ['tests/**/*.ts', 'tests/**/*.tsx'],
+    files: ['src/**/*.ts', 'src/**/*.tsx'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: 'tsconfig.test.json',
+        project: './tsconfig.json',
         tsconfigRootDir: process.cwd(),
       },
     },

@@ -13,8 +13,16 @@ describe('CommandType', (): void => {
     expect(CommandType.Build).toBe('build');
   });
 
-  it('should have exactly three enum values', (): void => {
+  it('should have Execute enum value', (): void => {
+    expect(CommandType.Execute).toBe('execute');
+  });
+
+  it('should have Init enum value', (): void => {
+    expect(CommandType.Init).toBe('init');
+  });
+
+  it('should have exactly five enum values', (): void => {
     const values = Object.values(CommandType);
-    expect(values).toHaveLength(3);
+    expect(values).toHaveLength(5);
   });
 });

@@ -30,7 +30,9 @@ export class ExecuteCommand implements Command {
 
     const agent = registry.getAgent(agentName);
     if (!agent) {
-      throw new Error(`Agent "${agentName}" not found`);
+      throw new Error(
+        `Agent "${agentName}" not found. Run "agent-scope agent add --name ${agentName} --role <role> --scope <scope>" to add it.`
+      );
     }
 
     const engine = new ExecutionEngine();
