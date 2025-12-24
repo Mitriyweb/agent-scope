@@ -136,21 +136,47 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 3 — Agent flows
+## Phase 3 — Agent flows ✅ COMPLETE
 
 **Goal:** Explicit and verifiable agent interaction.
 
-### Flow definitions
+**Status:** COMPLETE
 
-- [ ] Directed agent graphs (DAG)
-- [ ] Explicit input/output relationships
-- [ ] Flow correctness validation
+### Flow definitions ✅
 
-### Context handoff
+- [x] Directed agent graphs (DAG)
+- [x] Explicit input/output relationships
+- [x] Flow correctness validation
+- [x] JSON parser and serialization
+- [x] Cycle detection algorithm
 
-- [ ] Artifact-based context passing
-- [ ] No implicit global context
-- [ ] Clear ownership of produced artifacts
+### Artifact management ✅
+
+- [x] Artifact lifecycle tracking (created, used, archived)
+- [x] Ownership-based access control
+- [x] In-memory artifact storage
+
+### Context handoff ✅
+
+- [x] Artifact-based context passing
+- [x] No implicit global context
+- [x] Clear ownership of produced artifacts
+- [x] Context isolation per agent
+- [x] Context validation
+
+### CLI commands ✅
+
+- [x] `agent-scope flow validate` - Validate flow definitions
+- [x] `agent-scope flow show` - Display flow details
+- [x] `agent-scope flow graph` - Visualize flow structure
+
+### Testing & quality ✅
+
+- [x] 56 comprehensive tests (198 total)
+- [x] 86% statement coverage, 82% branch coverage
+- [x] All metrics above 80% minimum threshold
+- [x] ESLint compliance
+- [x] TypeScript strict mode
 
 ---
 
@@ -184,6 +210,27 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 6 — Extensibility
+## Phase 6 — Build system
 
-**Goal:** Grow an ecosystem without fr
+**Goal:** Build system for agents and flows.
+
+> CLI commands
+
+- [ ] `agent-scope build`
+- [ ] `agent-scope validate`
+
+> Build system
+
+- [ ] Create npm package
+- [ ] Add build scripts
+- [ ] Add release process
+- [ ] Publish on npm registry
+
+> Github pages
+
+- [ ] Add documentation
+
+> CI pipeline
+
+- [ ] Add CI pipeline
+- [ ] Add release process
