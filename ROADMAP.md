@@ -72,20 +72,20 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 1.5 — Agent execution & IDE integration ✅
+## Phase 1.5 — Agent execution & IDE integration 
 
 **Goal:** Enable agents to run with isolated contexts and integrate with IDEs.
 
 **Status:** COMPLETE
 
-### Agent execution engine ✅
+### Agent execution engine 
 
 - [x] Process-based agent execution with isolated contexts
 - [x] Execution state management (pending, running, completed, failed)
 - [x] Execution logging and result tracking
 - [x] Timeout and cancellation support
 
-### Context isolation ✅
+### Context isolation 
 
 - [x] Filesystem isolation based on scope patterns
 - [x] Environment variable isolation per agent
@@ -180,21 +180,41 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 4 — Developer tooling
+## Phase 4 — Developer tooling ✅ COMPLETE
 
-**Goal:** Improve usability without reducing control.
+**Goal:** Improve developer experience with better tools for understanding and debugging flows.
 
-### CLI tooling
+**Status:** Completed Dec 24, 2025
 
-- [ ] `agent-scope explain`
-- [ ] `agent-scope graph`
-- [ ] Improved diagnostics and error messages
+### CLI commands ✅
 
-### Templates
+- [x] `agent-scope explain flow` - Display flow overview, nodes, edges
+- [x] `agent-scope explain agent` - Display agent details and capabilities
+- [x] `agent-scope explain role` - Display role details and agents
+- [x] `agent-scope graph flow` - ASCII and JSON flow visualization
+- [x] `agent-scope graph agents` - Agent relationship graph with role filtering
+- [x] `agent-scope graph dependencies` - Dependency graph with depth control
 
-- [ ] Project templates
-- [ ] Standard role + flow presets
-- [ ] OpenSpec templates
+### Diagnostics ✅
+
+- [x] Enhanced error messages with context and suggestions
+- [x] Validation error details with remediation hints
+- [x] Error formatter utility with quiet mode
+
+### Templates & Presets ✅
+
+- [x] Project templates (basic-flow, multi-agent)
+- [x] Role presets (developer, qa, architect, reviewer)
+- [x] Flow presets (sequential, parallel)
+- [x] Template manager for scaffolding
+- [x] Preset manager for loading
+
+### Testing & quality ✅
+
+- [x] 60+ unit tests (246 total passing)
+- [x] Integration tests for all commands
+- [x] Error formatter tests
+- [x] Template and preset tests
 
 ---
 
