@@ -224,8 +224,8 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 > Execution is intentionally not part of the core.
 
-- [ ] Local execution adapters
-- [ ] Remote / API-based execution adapters
+- [x] Local execution adapters
+- [x] Remote / API-based execution adapters
 - [ ] CI-friendly non-interactive mode
 
 ---
@@ -236,14 +236,14 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 > CLI commands
 
-- [ ] `agent-scope build`
-- [ ] `agent-scope validate`
+- [x] `agent-scope build`
+- [x] `agent-scope validate`
 
 > Build system
 
-- [ ] Create npm package
-- [ ] Add build scripts
-- [ ] Add release process
+- [x] Create npm package
+- [x] Add build scripts
+- [x] Add release process
 - [ ] Publish on npm registry
 
 > Github pages

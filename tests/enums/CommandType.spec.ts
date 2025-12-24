@@ -9,8 +9,12 @@ describe('CommandType', (): void => {
     expect(CommandType.Version).toBe('version');
   });
 
-  it('should have exactly two enum values', (): void => {
+  it('should have Build enum value', (): void => {
+    expect(CommandType.Build).toBe('build');
+  });
+
+  it('should have exactly three enum values', (): void => {
     const values = Object.values(CommandType);
-    expect(values).toHaveLength(2);
+    expect(values).toHaveLength(3);
   });
 });

@@ -2,6 +2,7 @@ import type { CliOptions } from '@/types/index';
 import { CommandType } from '@/enums/CommandType';
 import { HelpCommand } from '@/commands/HelpCommand';
 import { VersionCommand } from '@/commands/VersionCommand';
+import { BuildCommand } from '@/commands/BuildCommand';
 
 function normalizeCommand(rawCommand: string | undefined): CommandType | null {
   if (!rawCommand) {
@@ -17,6 +18,9 @@ function normalizeCommand(rawCommand: string | undefined): CommandType | null {
     case '--version':
     case '-v':
       return CommandType.Version;
+    case CommandType.Build:
+    case 'build':
+      return CommandType.Build;
     default:
       return null;
   }
@@ -41,6 +45,11 @@ function getCommandHandler(command: CommandType | null): void {
 
   if (command === CommandType.Version) {
     new VersionCommand().execute();
+    process.exit(0);
+  }
+
+  if (command === CommandType.Build) {
+    new BuildCommand().execute();
     process.exit(0);
   }
 
