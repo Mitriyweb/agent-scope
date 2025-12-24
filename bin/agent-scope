@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+require('tsconfig-paths').register({
+  baseUrl: __dirname + '/../dist',
+  paths: {
+    '@/*': ['./*'],
+  },
+});
+
+require('../dist/index.js');

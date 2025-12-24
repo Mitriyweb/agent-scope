@@ -28,10 +28,18 @@ Goals:
 - **Language**: TypeScript only, no JavaScript files in `src/`
 - **Strict Mode**: Enable all strict compiler options in `tsconfig.json`
 - **No `any`**: Forbidden. Use explicit types or generics instead
-- **Enums**: Always use `enum` instead of union types for fixed sets of values
+- **Enums**: Always use `enum` instead of union types for ANY fixed set of values
   - ✓ `enum Status { Active = 'active', Inactive = 'inactive' }`
   - ✗ `type Status = 'active' | 'inactive'`
+  - ✓ `command: CommandType` (when command is limited to known values)
+  - ✗ `command: string | null` (never use unions for limited value sets)
 - **Naming**: Use PascalCase for types, interfaces, enums; camelCase for variables/functions
+- **Import Paths**: Always use absolute paths from project root
+  - ✓ `import { CommandType } from '@/enums/CommandType'`
+  - ✗ `import { CommandType } from '../enums/CommandType'`
+- **Type Imports**: Use `import type` for type-only imports
+  - ✓ `import type { CliOptions } from '@/types/index'`
+  - ✗ `import { CliOptions } from '@/types/index'` (when used only as type)
 - **Source Organization**: All source code in `src/` directory
   - `src/types/` — Type definitions and interfaces
   - `src/enums/` — Enum definitions
@@ -45,6 +53,9 @@ Goals:
 - Follow kebab-case for change IDs: `add-feature-name`
 - Use verb-led prefixes: `add-`, `update-`, `remove-`, `refactor-`
 - Keep files under 500 lines for readability
+- **Tests are mandatory**: No code without tests
+- Test files must be comprehensive and cover all code paths
+- Use descriptive test names that explain what is being tested
 
 ### Dependency Management
 
@@ -62,6 +73,34 @@ Goals:
 
 ### Testing Strategy
 
+- **Test-Driven Development**: All code MUST be written with tests from the start
+- Write tests BEFORE or ALONGSIDE implementation, never after
+- Every function, class, and module requires corresponding test coverage
+- Use Jest for unit testing with TypeScript support
+- **Test Directory Structure**: Tests live in `/tests` directory mirroring `/src` structure
+  - Example: `src/commands/HelpCommand.ts` → `tests/commands/HelpCommand.spec.ts`
+  - Test file naming: `<name>.spec.ts`
+  - Directory hierarchy must match source code organization
+  - Never colocate tests with source files
+- Minimum coverage: 80% for all new code
+- **Coverage Reporting**: Test coverage must be tracked and reported
+  - Run `npm run test:coverage` to generate coverage reports
+  - Coverage reports generated in `coverage/` directory
+  - Coverage thresholds enforced: 80% branches, functions, lines, statements
+  - CI pipeline runs coverage checks on every push/PR
+  - Coverage reports available in HTML format: `coverage/lcov-report/index.html`
+- **Coverage Baseline**: Coverage must never decrease
+  - Baseline stored in `coverage-baseline.json`
+  - Run `npm run coverage:check` to verify coverage meets baseline
+  - Run `npm run coverage:save` to update baseline after improvements
+  - Pre-commit hook automatically checks coverage and updates baseline if improved
+  - Commit fails if coverage drops below baseline (prevents regressions)
+  - Baseline is committed to git to track coverage history
+  - Auto-update on commit: if coverage improves, baseline is updated and staged
+- **Tests in Tasks**: Every task in `tasks.md` MUST include test implementation as a sub-task
+  - Example: `1.1 Implement feature X` should have `1.1.1 Write tests for feature X`
+  - Tests are not optional add-ons, they are part of the task definition
+  - Task is only complete when both implementation AND tests are done
 - Validate all proposals before implementation
 - Use `openspec validate --strict` for comprehensive checks
 - Verify scenario format: `#### Scenario:` (4 hashtags)
