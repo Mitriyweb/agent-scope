@@ -1,12 +1,15 @@
 {
   "name": "agent-scope",
   "version": "0.0.1",
-  "description": "Agent Scope",
+  "description": "CLI tool for configuring and orchestrating AI agents with explicit roles, scoped context, and OpenSpec-compatible specifications",
   "author": "Mitriyweb <mitriyweb@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/mitriyweb/agent-scope"
+  },
+  "bin": {
+    "agent-scope": "./bin/agent-scope"
   },
   "scripts": {
     "format": "prettier --write .",
@@ -21,9 +24,11 @@
   },
   "devDependencies": {
     "@j178/prek": "0.2.24",
+    "@types/node": "20.10.6",
     "eslint": "9.39.2",
     "knip": "5.38.2",
     "markdownlint-cli2": "0.20.0",
-    "prettier": "3.7.4"
+    "prettier": "3.7.4",
+    "typescript": "5.3.3"
   }
 }

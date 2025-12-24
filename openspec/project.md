@@ -13,6 +13,8 @@ Goals:
 
 ## Tech Stack
 
+- **TypeScript** — strict typing, no `any` allowed
+- **Node.js** — runtime (v20.9.0+)
 - **OpenSpec CLI** — specification validation and management
 - **Markdown** — documentation and specs format
 - **Git** — version control for specs and changes
@@ -20,6 +22,24 @@ Goals:
 ## Project Conventions
 
 ### Code Style
+
+#### TypeScript Requirements
+
+- **Language**: TypeScript only, no JavaScript files in `src/`
+- **Strict Mode**: Enable all strict compiler options in `tsconfig.json`
+- **No `any`**: Forbidden. Use explicit types or generics instead
+- **Enums**: Always use `enum` instead of union types for fixed sets of values
+  - ✓ `enum Status { Active = 'active', Inactive = 'inactive' }`
+  - ✗ `type Status = 'active' | 'inactive'`
+- **Naming**: Use PascalCase for types, interfaces, enums; camelCase for variables/functions
+- **Source Organization**: All source code in `src/` directory
+  - `src/types/` — Type definitions and interfaces
+  - `src/enums/` — Enum definitions
+  - `src/commands/` — CLI command implementations
+  - `src/utils/` — Utility functions
+  - `src/index.ts` — Entry point
+
+#### General Style
 
 - Use Markdown for all documentation
 - Follow kebab-case for change IDs: `add-feature-name`
