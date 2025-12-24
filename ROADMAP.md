@@ -49,7 +49,7 @@ The roadmap is actionable: items can be checked off as they are completed.
 - [ ] Built-in standard roles
   - [ ] `developer`
   - [ ] `qa`
-  - [ ] `spec`
+  - [ ] `architect`
   - [ ] `reviewer`
 
 - [ ] Custom role definitions

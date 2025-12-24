@@ -1,6 +1,6 @@
 {
   "name": "agent-scope",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "CLI tool for configuring and orchestrating AI agents with explicit roles, scoped context, and OpenSpec-compatible specifications",
   "author": "Mitriyweb <mitriyweb@gmail.com>",
   "license": "MIT",
