@@ -72,37 +72,39 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 1.5 — Agent execution & IDE integration
+## Phase 1.5 — Agent execution & IDE integration ✅
 
 **Goal:** Enable agents to run with isolated contexts and integrate with IDEs.
 
-### Agent execution engine
+**Status:** COMPLETE
 
-- [ ] Process-based agent execution with isolated contexts
-- [ ] Execution state management (pending, running, completed, failed)
-- [ ] Execution logging and result tracking
-- [ ] Timeout and cancellation support
+### Agent execution engine ✅
 
-### Context isolation
+- [x] Process-based agent execution with isolated contexts
+- [x] Execution state management (pending, running, completed, failed)
+- [x] Execution logging and result tracking
+- [x] Timeout and cancellation support
 
-- [ ] Filesystem isolation based on scope patterns
-- [ ] Environment variable isolation per agent
-- [ ] Process-level memory isolation
-- [ ] Temporary directory isolation
+### Context isolation ✅
 
-### Concurrent execution
+- [x] Filesystem isolation based on scope patterns
+- [x] Environment variable isolation per agent
+- [x] Process-level memory isolation
+- [x] Temporary directory isolation
 
-- [ ] Parallel agent execution
-- [ ] Concurrency control and resource limits
-- [ ] Deadlock detection
-- [ ] Failure handling in concurrent scenarios
+### Concurrent execution ✅
 
-### Workflow orchestration
+- [x] Parallel agent execution
+- [x] Concurrency control and resource limits
+- [x] Deadlock detection
+- [x] Failure handling in concurrent scenarios
 
-- [ ] DAG-based workflow definitions
-- [ ] Sequential, parallel, and conditional execution patterns
-- [ ] Fan-out/fan-in patterns
-- [ ] Agent-to-agent communication
+### Workflow orchestration ✅
+
+- [x] DAG-based workflow definitions
+- [x] Sequential, parallel, and conditional execution patterns
+- [x] Fan-out/fan-in patterns
+- [x] Agent-to-agent communication
 
 ### IDE integration
 
@@ -114,21 +116,23 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 2 — Specifications & contracts
+## Phase 2 — Specifications & contracts ✅
 
 **Goal:** Make specifications a strict contract between agents.
 
-### OpenSpec support
+**Status:** COMPLETE
 
-- [ ] OpenSpec-compatible specification files
-- [ ] Schema validation
-- [ ] Clear errors on invalid or incomplete specs
+### OpenSpec support ✅
 
-### Contract enforcement
+- [x] OpenSpec-compatible specification files
+- [x] Schema validation
+- [x] Clear errors on invalid or incomplete specs
 
-- [ ] Require valid OpenSpec input for consuming agents
-- [ ] Explicit producer → consumer mapping
-- [ ] Fail-fast behavior on contract mismatch
+### Contract enforcement ✅
+
+- [x] Require valid OpenSpec input for consuming agents
+- [x] Explicit producer → consumer mapping
+- [x] Fail-fast behavior on contract mismatch
 
 ---
 
