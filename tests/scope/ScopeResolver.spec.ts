@@ -69,5 +69,67 @@ describe('ScopeResolver', () => {
 
       expect(result).toBe('src/**');
     });
+
+    it('should handle complex nested patterns', () => {
+      const patterns = ['src/**', 'src/commands/**', 'src/commands/agent/**'];
+      const result = ScopeResolver.getMostSpecificPattern('src/commands/agent/index.ts', patterns);
+
+      expect(result).toBe('src/commands/agent/**');
+    });
+
+    it('should return undefined when no patterns match', () => {
+      const patterns = ['tests/**', 'docs/**'];
+      const result = ScopeResolver.getMostSpecificPattern('src/index.ts', patterns);
+
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should handle empty pattern array', () => {
+      expect(ScopeResolver.canAccess('src/index.ts', { patterns: [], readOnly: false })).toBe(
+        false
+      );
+    });
+
+    it('should handle files at root level', () => {
+      const scope: Scope = { patterns: ['*.ts'], readOnly: false };
+      expect(ScopeResolver.canAccess('index.ts', scope)).toBe(true);
+      expect(ScopeResolver.canAccess('src/index.ts', scope)).toBe(false);
+    });
+
+    it('should handle deeply nested paths', () => {
+      const scope: Scope = { patterns: ['src/**'], readOnly: false };
+      expect(ScopeResolver.canAccess('src/a/b/c/d/e/f/index.ts', scope)).toBe(true);
+    });
+
+    it('should handle multiple patterns with different specificity', () => {
+      const scope: Scope = { patterns: ['src/**', 'tests/**', 'lib/**'], readOnly: false };
+      expect(ScopeResolver.canAccess('src/index.ts', scope)).toBe(true);
+      expect(ScopeResolver.canAccess('tests/index.spec.ts', scope)).toBe(true);
+      expect(ScopeResolver.canAccess('lib/helper.ts', scope)).toBe(true);
+      expect(ScopeResolver.canAccess('docs/README.md', scope)).toBe(false);
+    });
+
+    it('should handle canModify with multiple patterns', () => {
+      const scope: Scope = { patterns: ['src/**', 'tests/**'], readOnly: false };
+      expect(ScopeResolver.canModify('src/index.ts', scope)).toBe(true);
+      expect(ScopeResolver.canModify('tests/index.spec.ts', scope)).toBe(true);
+      expect(ScopeResolver.canModify('docs/README.md', scope)).toBe(false);
+    });
+
+    it('should handle getMostSpecificPattern with overlapping patterns', () => {
+      const patterns = [
+        'src/**',
+        'src/commands/**',
+        'src/commands/agent/**',
+        'src/commands/agent/index/**',
+      ];
+      const result = ScopeResolver.getMostSpecificPattern(
+        'src/commands/agent/index/test.ts',
+        patterns
+      );
+      expect(result).toBe('src/commands/agent/index/**');
+    });
   });
 });

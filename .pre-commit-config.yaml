@@ -42,3 +42,17 @@ repos:
         language: system
         pass_filenames: false
         stages: [commit]
+
+      - id: coverage
+        name: Check test coverage
+        entry: npm run test:coverage
+        language: system
+        pass_filenames: false
+        stages: [commit]
+
+      - id: coverage-check
+        name: Validate coverage baseline
+        entry: node scripts/precommit-coverage.js
+        language: system
+        pass_filenames: false
+        stages: [commit]

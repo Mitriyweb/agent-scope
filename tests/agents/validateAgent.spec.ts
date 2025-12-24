@@ -50,4 +50,30 @@ describe('validateAgent', () => {
     expect(() => validateAgent(null)).toThrow(AgentValidationError);
     expect(() => validateAgent('not an object')).toThrow(AgentValidationError);
   });
+
+  it('should reject agent with whitespace-only name', () => {
+    const invalid = { ...validAgent, name: '   ' };
+    expect(() => validateAgent(invalid)).toThrow(AgentValidationError);
+  });
+
+  it('should accept agent with glob patterns', () => {
+    const agent = {
+      ...validAgent,
+      scope: { patterns: ['src/**/*.ts', 'tests/**/*.spec.ts'], readOnly: false },
+    };
+    expect(() => validateAgent(agent)).not.toThrow();
+  });
+
+  it('should accept agent with multiple valid patterns', () => {
+    const agent = {
+      ...validAgent,
+      scope: { patterns: ['src/**', 'tests/**', 'lib/**'], readOnly: false },
+    };
+    expect(() => validateAgent(agent)).not.toThrow();
+  });
+
+  it('should accept agent with readOnly true', () => {
+    const agent = { ...validAgent, scope: { patterns: ['docs/**'], readOnly: true } };
+    expect(() => validateAgent(agent)).not.toThrow();
+  });
 });

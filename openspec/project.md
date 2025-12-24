@@ -82,6 +82,12 @@ Goals:
   - Test file naming: `<name>.spec.ts`
   - Directory hierarchy must match source code organization
   - Never colocate tests with source files
+- **Test Structure Rule: 1 it, 1 expect**
+  - Each test (`it` block) MUST have exactly ONE primary assertion (`expect`)
+  - One test = one behavior being tested
+  - Multiple related assertions on same object are acceptable (e.g., `expect(obj.prop1).toBe(x); expect(obj.prop2).toBe(y)` for same behavior)
+  - Use separate `it` blocks for separate concerns or conditions
+  - This ensures tests are focused, readable, and maintainable
 - **Minimum coverage: 85% for all code** (increased from 80%)
   - This is a hard floor that cannot be lowered
   - All new code must be written with tests to achieve 85%+ coverage

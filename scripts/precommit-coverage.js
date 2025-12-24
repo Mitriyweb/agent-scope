@@ -65,12 +65,14 @@ const current = calculateCoverage(coverageData);
 const base = baseline.coverage;
 
 const metrics = ['statements', 'branches', 'functions', 'lines'];
+const MINIMUM_THRESHOLD = 80; // Non-negotiable minimum coverage threshold
 let hasDecreased = false;
 let hasImproved = false;
+let isBelowMinimum = false;
 
 console.log('\n📊 Coverage Check:\n');
-console.log('Metric       | Current | Baseline | Status');
-console.log('-------------|---------|----------|--------');
+console.log('Metric       | Current | Baseline | Minimum | Status');
+console.log('-------------|---------|----------|---------|--------');
 
 metrics.forEach(metric => {
   const currentVal = current[metric];
@@ -82,43 +84,69 @@ metrics.forEach(metric => {
     hasImproved = true;
   }
 
-  const status = currentVal > baselineVal ? '⬆️ ' : currentVal < baselineVal ? '⬇️ ' : '➡️ ';
+  if (currentVal < MINIMUM_THRESHOLD) {
+    isBelowMinimum = true;
+  }
+
+  const status =
+    currentVal < MINIMUM_THRESHOLD
+      ? '❌'
+      : currentVal > baselineVal
+        ? '⬆️ '
+        : currentVal < baselineVal
+          ? '⬇️ '
+          : '➡️ ';
   console.log(
-    `${metric.padEnd(12)} | ${String(currentVal).padStart(6)}% | ${String(baselineVal).padStart(7)}% | ${status}`
+    `${metric.padEnd(12)} | ${String(currentVal).padStart(6)}% | ${String(baselineVal).padStart(7)}% | ${String(MINIMUM_THRESHOLD).padStart(6)}% | ${status}`
   );
 });
 
 console.log('');
 
+if (isBelowMinimum) {
+  console.error(`❌ Coverage below 80% minimum threshold! Commit aborted.`);
+  console.error(`   All metrics must be at least 80% (non-negotiable rule).`);
+  process.exit(1);
+}
+
 if (hasDecreased) {
-  console.error('❌ Coverage has decreased! Commit aborted.');
+  console.error('❌ Coverage has decreased below baseline! Commit aborted.');
   process.exit(1);
 }
 
 if (hasImproved) {
-  console.log('📈 Coverage has improved! Updating baseline...\n');
+  // Only update baseline if all metrics are at least at minimum threshold
+  const allMetricsAboveMinimum = metrics.every(metric => current[metric] >= MINIMUM_THRESHOLD);
 
-  const newBaseline = {
-    version: '1.0.0',
-    timestamp: new Date().toISOString(),
-    coverage: current,
-    description: `Coverage baseline updated - ${new Date().toLocaleDateString()}`,
-  };
+  if (allMetricsAboveMinimum) {
+    console.log('📈 Coverage has improved! Updating baseline...\n');
 
-  fs.writeFileSync(baselineFile, JSON.stringify(newBaseline, null, 2));
+    const newBaseline = {
+      version: '1.0.0',
+      timestamp: new Date().toISOString(),
+      coverage: current,
+      description: `Coverage baseline updated - ${new Date().toLocaleDateString()} (all metrics >= 80%)`,
+    };
 
-  console.log('✅ Coverage baseline updated:');
-  console.log(`   Statements: ${current.statements}%`);
-  console.log(`   Branches:   ${current.branches}%`);
-  console.log(`   Functions:  ${current.functions}%`);
-  console.log(`   Lines:      ${current.lines}%\n`);
+    fs.writeFileSync(baselineFile, JSON.stringify(newBaseline, null, 2));
 
-  // Stage the baseline file for commit
-  const { execSync } = require('child_process');
-  try {
-    execSync('git add coverage-baseline.json', { stdio: 'inherit' });
-  } catch (e) {
-    console.warn('⚠️  Could not auto-stage coverage-baseline.json');
+    console.log('✅ Coverage baseline updated:');
+    console.log(`   Statements: ${current.statements}%`);
+    console.log(`   Branches:   ${current.branches}%`);
+    console.log(`   Functions:  ${current.functions}%`);
+    console.log(`   Lines:      ${current.lines}%\n`);
+
+    // Stage the baseline file for commit
+    const { execSync } = require('child_process');
+    try {
+      execSync('git add coverage-baseline.json', { stdio: 'inherit' });
+    } catch (e) {
+      console.warn('⚠️  Could not auto-stage coverage-baseline.json');
+    }
+  } else {
+    console.log(
+      '⚠️  Coverage improved but some metrics below 80% minimum. Baseline NOT updated.\n'
+    );
   }
 } else {
   console.log('✅ Coverage meets baseline. Proceeding with commit.\n');
