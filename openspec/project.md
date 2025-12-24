@@ -82,21 +82,28 @@ Goals:
   - Test file naming: `<name>.spec.ts`
   - Directory hierarchy must match source code organization
   - Never colocate tests with source files
-- Minimum coverage: 80% for all new code
+- **Minimum coverage: 85% for all code** (increased from 80%)
+  - This is a hard floor that cannot be lowered
+  - All new code must be written with tests to achieve 85%+ coverage
+  - Existing code must maintain or improve coverage toward 85%
 - **Coverage Reporting**: Test coverage must be tracked and reported
   - Run `npm run test:coverage` to generate coverage reports
   - Coverage reports generated in `coverage/` directory
-  - Coverage thresholds enforced: 80% branches, functions, lines, statements
+  - Coverage thresholds enforced: 85% branches, functions, lines, statements
   - CI pipeline runs coverage checks on every push/PR
   - Coverage reports available in HTML format: `coverage/lcov-report/index.html`
-- **Coverage Baseline**: Coverage must never decrease
+- **Coverage Baseline**: Coverage must never decrease below 85%
+  - **MINIMUM THRESHOLD: 85% coverage is non-negotiable**
+  - Coverage cannot be lowered below 85% under any circumstances
+  - All metrics (statements, branches, functions, lines) must maintain 85% minimum
   - Baseline stored in `coverage-baseline.json`
   - Run `npm run coverage:check` to verify coverage meets baseline
   - Run `npm run coverage:save` to update baseline after improvements
   - Pre-commit hook automatically checks coverage and updates baseline if improved
-  - Commit fails if coverage drops below baseline (prevents regressions)
+  - Commit fails if coverage drops below 85% (prevents regressions)
   - Baseline is committed to git to track coverage history
   - Auto-update on commit: if coverage improves, baseline is updated and staged
+  - If coverage falls below 85%, must add tests to restore coverage before committing
 - **Tests in Tasks**: Every task in `tasks.md` MUST include test implementation as a sub-task
   - Example: `1.1 Implement feature X` should have `1.1.1 Write tests for feature X`
   - Tests are not optional add-ons, they are part of the task definition
