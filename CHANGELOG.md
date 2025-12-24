@@ -19,3 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive documentation (README, ROADMAP, CONTRIBUTING)
 - License (MIT) and governance files (CODE_OF_CONDUCT, SECURITY)
 - OpenSpec configuration for specification tracking
+- Execution adapters for command execution:
+  - `ExecutionAdapter` interface with `ExecutionResult` and `ExecutionOptions` types
+  - `LocalExecutionAdapter` for executing commands locally using Node.js child_process
+  - `RemoteExecutionAdapter` for executing commands on remote endpoints with retry logic
+  - `ExecutionStatus` enum for tracking execution states (Pending, Running, Success, Failed, Timeout, Cancelled)
+- Comprehensive test coverage for execution adapters (35 test suites, 285 tests total)
