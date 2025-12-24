@@ -16,15 +16,21 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 0 — Project bootstrap
+## Phase 0 — Project bootstrap ✅ COMPLETE
 
 **Goal:** Prepare the repository and core structure.
 
-- [ ] Repository structure
-- [ ] CLI entry point
-- [ ] Basic command routing
-- [ ] Initial documentation (`README.md`, `roadmap.md`)
-- [ ] License and contribution guidelines
+- [x] Repository structure (src/, bin/, tests/, docs/)
+- [x] CLI entry point with command routing
+- [x] Basic command routing (help, version)
+- [x] Initial documentation (README.md, ROADMAP.md, CONTRIBUTING.md, CHANGELOG.md)
+- [x] License and contribution guidelines (LICENSE, CODE_OF_CONDUCT.md, SECURITY.md)
+- [x] TypeScript configuration with strict compiler options
+- [x] Jest testing framework with 100% coverage baseline
+- [x] ESLint configuration enforcing project conventions
+- [x] Coverage tracking with auto-update on commit
+- [x] Pre-commit hooks with validation
+- [x] CI pipeline with test and coverage validation
 
 ---
 
