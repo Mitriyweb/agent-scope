@@ -34,41 +34,83 @@ The roadmap is actionable: items can be checked off as they are completed.
 
 ---
 
-## Phase 1 — Core configuration (MVP)
+## Phase 1 — Core configuration (MVP) ✅ COMPLETE
 
 **Goal:** Define stable primitives for agents, roles, and context.
 
 ### Agents
 
-- [ ] Agent definition (name, role, scope)
-- [ ] Agent registry via configuration file
-- [ ] Validation of agent definitions
+- [x] Agent definition (name, role, scope)
+- [x] Agent registry via configuration file
+- [x] Validation of agent definitions
 
 ### Roles
 
-- [ ] Built-in standard roles
-  - [ ] `developer`
-  - [ ] `qa`
-  - [ ] `architect`
-  - [ ] `reviewer`
+- [x] Built-in standard roles
+  - [x] `developer`
+  - [x] `qa`
+  - [x] `architect`
+  - [x] `reviewer`
 
-- [ ] Custom role definitions
-- [ ] Role validation (responsibility, allowed outputs)
+- [x] Custom role definitions
+- [x] Role validation (responsibility, allowed outputs)
 
 ### Context (scope)
 
-- [ ] File- and directory-based scoping
-- [ ] Read-only vs read-write flags
-- [ ] Deterministic scope resolution
+- [x] File- and directory-based scoping
+- [x] Read-only vs read-write flags
+- [x] Deterministic scope resolution
 
 ### CLI commands
 
-- [ ] `agent-scope init`
-- [ ] `agent-scope agent add`
-- [ ] `agent-scope agent remove`
-- [ ] `agent-scope agent list`
-- [ ] `agent-scope role list`
-- [ ] `agent-scope validate`
+- [x] `agent-scope init`
+- [x] `agent-scope agent add`
+- [x] `agent-scope agent remove`
+- [x] `agent-scope agent list`
+- [x] `agent-scope role list`
+- [x] `agent-scope validate`
+
+---
+
+## Phase 2.5 — Agent execution & IDE integration
+
+**Goal:** Enable agents to run with isolated contexts and integrate with IDEs.
+
+### Agent execution engine
+
+- [ ] Process-based agent execution with isolated contexts
+- [ ] Execution state management (pending, running, completed, failed)
+- [ ] Execution logging and result tracking
+- [ ] Timeout and cancellation support
+
+### Context isolation
+
+- [ ] Filesystem isolation based on scope patterns
+- [ ] Environment variable isolation per agent
+- [ ] Process-level memory isolation
+- [ ] Temporary directory isolation
+
+### Concurrent execution
+
+- [ ] Parallel agent execution
+- [ ] Concurrency control and resource limits
+- [ ] Deadlock detection
+- [ ] Failure handling in concurrent scenarios
+
+### Workflow orchestration
+
+- [ ] DAG-based workflow definitions
+- [ ] Sequential, parallel, and conditional execution patterns
+- [ ] Fan-out/fan-in patterns
+- [ ] Agent-to-agent communication
+
+### IDE integration
+
+- [ ] VS Code extension with agent execution and workflow management
+- [ ] JetBrains plugin (IntelliJ, PyCharm, WebStorm)
+- [ ] Neovim plugin
+- [ ] JSON-RPC protocol for IDE communication
+- [ ] Real-time execution updates
 
 ---
 
