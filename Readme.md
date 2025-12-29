@@ -142,43 +142,50 @@ Each agent operates **only within its own scope** and against **explicit OpenSpe
 
 ---
 
-## Example CLI (conceptual)
+## CLI Usage
+
+### Initialize project
 
 ```bash
 agent-scope init
+```
 
-agent-scope agent add spec \
-  --role requirements \
-  --scope docs/
+This creates the `.agent-scope/` directory and an `AGENTS.md` file (which is also linked to `openspec/AGENTS.md` if the project uses OpenSpec).
 
-agent-scope agent add coder \
-  --role coding \
-  --scope src/
+### Manage Agents
 
-agent-scope agent add tester \
-  --role testing \
-  --scope tests/
+```bash
+# List all configured agents
+agent-scope agent list
+
+# Add a new agent
+agent-scope agent add "Coder" \
+  --role "developer" \
+  --scope "src/**" \
+  --description "Implements core logic"
+```
+
+### Manage Skills
+
+```bash
+# Add a new skill template
+agent-scope skill add "SecurityAudit"
 ```
 
 ---
 
 ## Project configuration
 
-Configuration is stored in the repository and can be versioned.
-
-Example structure:
+Configuration is stored in the `.agent-scope/` directory:
 
 ```text
 .agent-scope/
-  agents.yaml
-  flows.yaml
+  agents.yaml   # Agent definitions
+  AGENTS.md     # Project-level agent instructions
+  skills/       # Reusable skill markdown files
 ```
 
-This makes agent behavior:
-
-- transparent
-- reproducible
-- auditable
+The system also supports legacy migration from `ai/` and root `AGENTS.md` during `init`.
 
 ---
 

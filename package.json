@@ -1,6 +1,6 @@
 {
   "name": "agent-scope",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "CLI tool for configuring and orchestrating AI agents with explicit roles, scoped context, and OpenSpec-compatible specifications",
   "author": "Mitriyweb <mitriyweb@gmail.com>",
   "license": "MIT",
@@ -30,11 +30,14 @@
     "prepare": "prek install"
   },
   "dependencies": {
+    "commander": "^14.0.2",
+    "js-yaml": "^4.1.1",
     "tsconfig-paths": "4.2.0"
   },
   "devDependencies": {
     "@j178/prek": "0.2.24",
     "@types/jest": "29.5.11",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "25.0.3",
     "@typescript-eslint/eslint-plugin": "6.16.0",
     "@typescript-eslint/parser": "6.16.0",

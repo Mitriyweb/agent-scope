@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@latest/schema.json",
-  "entry": ["index.js", "bin/**/*.js"],
-  "project": ["**/*.js", "**/*.mjs"],
-  "ignore": ["node_modules/**", "dist/**", "build/**"],
+  "entry": ["src/app/index.ts", "src/app/**/*.ts", "bin/agent-scope"],
+  "project": ["src/**/*.ts"],
+  "ignore": ["node_modules/**", "dist/**"],
   "ignoreDependencies": ["tsconfig-paths"]
 }

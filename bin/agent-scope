@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 require('tsconfig-paths').register({
-  baseUrl: __dirname + '/../dist',
+  baseUrl: __dirname + '/../dist/src/app',
   paths: {
     '@/*': ['./*'],
   },
 });
 
-require('../dist/index.js');
+const { program } = require('../dist/src/app/index.js');
+program.parse(process.argv);
