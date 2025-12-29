@@ -27,7 +27,14 @@
     "knip": "knip",
     "audit": "npm audit --audit-level=moderate",
     "precommit": "npm run build && npm run test:coverage && node scripts/precommit-coverage.js && npm run lint && npm run knip && npm run audit",
-    "prepare": "prek install"
+    "prepare": "prek install",
+    "backlog:validate": "node scripts/validate-backlog-roadmap.js",
+    "backlog:sync": "node scripts/backlog-sync-runner.js",
+    "backlog:sync:dry-run": "node scripts/backlog-sync-runner.js --dry-run",
+    "backlog:create": "node scripts/backlog-create-runner.js --interactive",
+    "backlog:create:from-issue": "node scripts/backlog-create-runner.js --from-issue --issue",
+    "backlog:create:quick": "node scripts/backlog-create-runner.js --quick",
+    "roadmap:sync-status": "node scripts/sync-roadmap-status.js"
   },
   "dependencies": {
     "commander": "^14.0.2",

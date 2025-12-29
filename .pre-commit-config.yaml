@@ -64,3 +64,10 @@ repos:
         pass_filenames: false
         stages: [commit]
         always_run: true
+
+      - id: backlog-roadmap-consistency
+        name: Validate backlog-roadmap consistency
+        entry: npm run backlog:validate
+        language: system
+        files: ^(BACKLOG|ROADMAP)\.md$
+        stages: [commit]

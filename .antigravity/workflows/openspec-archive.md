@@ -1,1 +1,0 @@
-/Users/dmytro.zvieriev/sandbox/agent-scope/ai/workflows/openspec-archive.md

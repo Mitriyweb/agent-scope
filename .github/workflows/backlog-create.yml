@@ -1,0 +1,62 @@
+name: Create Backlog Item
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Feature title'
+        required: true
+        type: string
+      user_story:
+        description: 'User story (As a... I want... So that...)'
+        required: true
+        type: string
+      priority:
+        description: 'Priority level'
+        required: true
+        type: choice
+        options:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+        default: MEDIUM
+      effort:
+        description: 'Estimated effort'
+        required: true
+        type: choice
+        options:
+          - XS
+          - S
+          - M
+          - L
+          - XL
+        default: M
+
+jobs:
+  create-backlog-item:
+    name: Create Backlog Item
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create backlog item
+        run: |
+          node scripts/backlog-create-runner.js \
+            --title="${{ github.event.inputs.title }}" \
+            --user-story="${{ github.event.inputs.user_story }}" \
+            --priority="${{ github.event.inputs.priority }}" \
+            --effort="${{ github.event.inputs.effort }}"
