@@ -20,12 +20,12 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 **Goal:** Prepare the repository and core infrastructure.
 
-- [ ] Repository structure (`src/`, `bin/`, `tests/`, `docs/`)
-- [ ] CLI entry point with command routing (help, version)
-- [ ] TypeScript configuration with strict compiler options
-- [ ] Testing framework with coverage baseline
-- [ ] Initial documentation (`README.md`, `ROADMAP.md`, `CONTRIBUTING.md`)
-- [ ] CI pipeline (tests, lint, typecheck, pre-commit hooks)
+- [x] Repository structure (`src/`, `bin/`, `tests/`, `docs/`)
+- [x] CLI entry point with command routing (help, version)
+- [x] TypeScript configuration with strict compiler options
+- [x] Testing framework with coverage baseline
+- [/] Initial documentation (`README.md`, `ROADMAP.md`, `CONTRIBUTING.md`)
+- [x] CI pipeline (tests, lint, typecheck, pre-commit hooks)
 
 ---
 
