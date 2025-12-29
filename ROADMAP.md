@@ -1,256 +1,151 @@
 # agent-scope Roadmap
 
-This document tracks the planned and completed work for **agent-scope** — a CLI tool for configuring and orchestrating AI agents with explicit roles, scoped context, and OpenSpec-compatible specifications.
+This document tracks the planned work for **agent-scope** — a CLI tool for configuring, orchestrating, and executing **AI agents** with explicit roles, scoped context, and OpenSpec-compatible specifications.
 
-The roadmap is actionable: items can be checked off as they are completed.
+This roadmap has been updated to reflect modern **Context Engineering** and **Spec-Driven Development (SDD)** practices.
 
 ---
 
 ## Principles
 
-- Explicit over implicit behavior
-- Roles and context are always declared
-- OpenSpec is the source of truth for specifications
-- Configuration is versioned and auditable
-- No hidden state, no magic
+- **Context Engineering over Prompt Engineering:** Dynamically managing tokens is the core challenge.
+- **Spec-Driven Development (SDD):** No implementation without a specification and a plan.
+- **Explicit Context Isolation:** Use subagents to prevent "Context Rot" and "Task Drift."
+- **Engineering Guardrails:** Automated validation (ArchUnit, API-diff, Linters) is mandatory.
+- **OpenSpec as Truth:** Specifications define the contract between agents.
 
 ---
 
-## Phase 0 — Project bootstrap ✅ COMPLETE
+## Phase 0 — Project Bootstrap
 
-**Goal:** Prepare the repository and core structure.
+**Goal:** Prepare the repository and core infrastructure.
 
-- [x] Repository structure (src/, bin/, tests/, docs/)
-- [x] CLI entry point with command routing
-- [x] Basic command routing (help, version)
-- [x] Initial documentation (README.md, ROADMAP.md, CONTRIBUTING.md, CHANGELOG.md)
-- [x] License and contribution guidelines (LICENSE, CODE_OF_CONDUCT.md, SECURITY.md)
-- [x] TypeScript configuration with strict compiler options
-- [x] Jest testing framework with 100% coverage baseline
-- [x] ESLint configuration enforcing project conventions
-- [x] Coverage tracking with auto-update on commit
-- [x] Pre-commit hooks with validation
-- [x] CI pipeline with test and coverage validation
+- [ ] Repository structure (`src/`, `bin/`, `tests/`, `docs/`)
+- [ ] CLI entry point with command routing (help, version)
+- [ ] TypeScript configuration with strict compiler options
+- [ ] Testing framework with coverage baseline
+- [ ] Initial documentation (`README.md`, `ROADMAP.md`, `CONTRIBUTING.md`)
+- [ ] CI pipeline (tests, lint, typecheck, pre-commit hooks)
 
 ---
 
-## Phase 1 — Core configuration (MVP) ✅ COMPLETE
+## Phase 1 — Agent Memory & Skills
 
-**Goal:** Define stable primitives for agents, roles, and context.
+**Goal:** Define stable primitives for agents and reusable instructions.
 
-### Agents
+### AI Agents & Roles
 
-- [x] Agent definition (name, role, scope)
-- [x] Agent registry via configuration file
-- [x] Validation of agent definitions
+- [ ] AI agent definition (name, role, model, scope)
+- [ ] **Agent Memory Blocks:** Support for `AGENTS.md` format (standardized project instructions).
+- [ ] Built-in roles: `developer`, `qa`, `architect`, `reviewer`.
 
-### Roles
+### Reusable Skills (3-Level Architecture)
 
-- [x] Built-in standard roles
-  - [x] `developer`
-  - [x] `qa`
-  - [x] `architect`
-  - [x] `reviewer`
+- [ ] **Level 1 (Metadata):** YAML frontmatter loaded at startup (~100 tokens).
+- [ ] **Level 2 (Instructions):** Markdown-based instructions loaded only when triggered.
+- [ ] **Level 3 (Resources):** External code/docs loaded into context as needed.
 
-- [x] Custom role definitions
-- [x] Role validation (responsibility, allowed outputs)
+### CLI Commands
 
-### Context (scope)
-
-- [x] File- and directory-based scoping
-- [x] Read-only vs read-write flags
-- [x] Deterministic scope resolution
-
-### CLI commands
-
-- [x] `agent-scope init`
-- [x] `agent-scope agent add`
-- [x] `agent-scope agent remove`
-- [x] `agent-scope agent list`
-- [x] `agent-scope role list`
-- [x] `agent-scope validate`
+- [ ] `agent-scope init`
+- [ ] `agent-scope agent add/list`
+- [ ] `agent-scope skill add`
 
 ---
 
-## Phase 1.5 — Agent execution & IDE integration
+## Phase 2 — Spec-Driven Development (SDD)
 
-**Goal:** Enable agents to run with isolated contexts and integrate with IDEs.
+**Goal:** Move from "Vibe Coding" to structured AI orchestration.
 
-**Status:** COMPLETE
+### Workflow Orchestration
 
-### Agent execution engine
+- [ ] **Specify:** Define "What" and "Why" (Requirements, Acceptance Criteria).
+- [ ] **Plan:** Define "How" (Architecture, API contracts) without changing code.
+- [ ] **Tasks:** Break down plans into isolated, executable todo-list items.
+- [ ] **Implement:** Execute specific tasks with targeted context.
 
-- [x] Process-based agent execution with isolated contexts
-- [x] Execution state management (pending, running, completed, failed)
-- [x] Execution logging and result tracking
-- [x] Timeout and cancellation support
+### Artifact Management
 
-### Context isolation
-
-- [x] Filesystem isolation based on scope patterns
-- [x] Environment variable isolation per agent
-- [x] Process-level memory isolation
-- [x] Temporary directory isolation
-
-### Concurrent execution ✅
-
-- [x] Parallel agent execution
-- [x] Concurrency control and resource limits
-- [x] Deadlock detection
-- [x] Failure handling in concurrent scenarios
-
-### Workflow orchestration ✅
-
-- [x] DAG-based workflow definitions
-- [x] Sequential, parallel, and conditional execution patterns
-- [x] Fan-out/fan-in patterns
-- [x] Agent-to-agent communication
-
-### IDE integration
-
-- [ ] VS Code extension with agent execution and workflow management
-- [ ] JetBrains plugin (IntelliJ, PyCharm, WebStorm)
-- [ ] Neovim plugin
-- [ ] JSON-RPC protocol for IDE communication
-- [ ] Real-time execution updates
+- [ ] Standardized directory structure: `specs/`, `plans/`, `tasks/`, `contracts/`.
+- [ ] Support for **Embedded Plan Mode**: Agents must present a plan for approval before mutation.
+- [ ] OpenSpec validation for API-first development.
 
 ---
 
-## Phase 2 — Specifications & contracts ✅
+## Phase 3 — Execution Engine & Guardrails
 
-**Goal:** Make specifications a strict contract between agents.
+**Goal:** Execute agents with strict safety and quality checks.
 
-**Status:** COMPLETE
+### The Hook System
 
-### OpenSpec support ✅
+- [ ] `PreToolUse`: Intercept and block dangerous commands or sensitive file access.
+- [ ] `PostToolUse`: Automatically run formatting, tests, or logging after an action.
+- [ ] `SubagentStop`: Summarize subtask results for the parent agent.
 
-- [x] OpenSpec-compatible specification files
-- [x] Schema validation
-- [x] Clear errors on invalid or incomplete specs
+### Guardrails (AI Contracts)
 
-### Contract enforcement ✅
-
-- [x] Require valid OpenSpec input for consuming agents
-- [x] Explicit producer → consumer mapping
-- [x] Fail-fast behavior on contract mismatch
+- [ ] **Architectural Guardrails:** Integration with `ArchUnit` (Java), `ts-arch` (TS), or `dependency-cruiser`.
+- [ ] **API Guardrails:** Integrated `oasdiff` to detect breaking changes in OpenAPI specs.
+- [ ] **Static Analysis:** Mandatory linting and security scans on agent-generated code.
 
 ---
 
-## Phase 3 — Agent flows ✅ COMPLETE
+## Phase 4 — Advanced Context Engineering
 
-**Goal:** Explicit and verifiable agent interaction.
+**Goal:** Mitigate "Context Rot" and "Task Drift" in complex systems.
 
-**Status:** COMPLETE
+### Context Isolation
 
-### Flow definitions ✅
+- [ ] **Subagent Sandboxing:** Execute specialized subtasks in completely isolated contexts.
+- [ ] **Domain-Driven Scoping:** Bound an agent’s context strictly to a specific DDD module or Hexagonal layer.
+- [ ] **Semantic Ignorance:** Use `.agentignore` to filter noise (logs, build artifacts, sensitive data).
 
-- [x] Directed agent graphs (DAG)
-- [x] Explicit input/output relationships
-- [x] Flow correctness validation
-- [x] JSON parser and serialization
-- [x] Cycle detection algorithm
+### Structured Knowledge
 
-### Artifact management ✅
-
-- [x] Artifact lifecycle tracking (created, used, archived)
-- [x] Ownership-based access control
-- [x] In-memory artifact storage
-
-### Context handoff ✅
-
-- [x] Artifact-based context passing
-- [x] No implicit global context
-- [x] Clear ownership of produced artifacts
-- [x] Context isolation per agent
-- [x] Context validation
-
-### CLI commands ✅
-
-- [x] `agent-scope flow validate` - Validate flow definitions
-- [x] `agent-scope flow show` - Display flow details
-- [x] `agent-scope flow graph` - Visualize flow structure
-
-### Testing & quality ✅
-
-- [x] 56 comprehensive tests (198 total)
-- [x] 86% statement coverage, 82% branch coverage
-- [x] All metrics above 80% minimum threshold
-- [x] ESLint compliance
-- [x] TypeScript strict mode
+- [ ] **MCP (Model Context Protocol):** Support for MCP servers to fetch real-time, structured documentation.
+- [ ] **Context Burst Prevention:** Automatically summarize large tool outputs (e.g., long test logs).
 
 ---
 
-## Phase 4 — Developer tooling ✅ COMPLETE
+## Phase 5 — Developer Tooling (IDE)
 
-**Goal:** Improve developer experience with better tools for understanding and debugging flows.
+**Goal:** Provide visibility into the agentic "thought" process.
 
-**Status:** Completed Dec 24, 2025
+### CLI Diagnostics
 
-### CLI Commands ✅
+- [ ] `agent-scope explain [agent|plan|flow]`
+- [ ] `agent-scope graph`: Visualize the DAG of agent interactions.
+- [ ] Structured validation errors with remediation hints.
 
-- [x] `agent-scope explain flow` - Display flow overview, nodes, edges
-- [x] `agent-scope explain agent` - Display agent details and capabilities
-- [x] `agent-scope explain role` - Display role details and agents
-- [x] `agent-scope graph flow` - ASCII and JSON flow visualization
-- [x] `agent-scope graph agents` - Agent relationship graph with role filtering
-- [x] `agent-scope graph dependencies` - Dependency graph with depth control
+### IDE Integration
 
-### Diagnostics ✅
-
-- [x] Enhanced error messages with context and suggestions
-- [x] Validation error details with remediation hints
-- [x] Error formatter utility with quiet mode
-
-### Templates & Presets ✅
-
-- [x] Project templates (basic-flow, multi-agent)
-- [x] Role presets (developer, qa, architect, reviewer)
-- [x] Flow presets (sequential, parallel)
-- [x] Template manager for scaffolding
-- [x] Preset manager for loading
-
-### Code Quality ✅
-
-- [x] 60+ unit tests (246 total passing)
-- [x] Integration tests for all commands
-- [x] Error formatter tests
-- [x] Template and preset tests
+- [ ] **VS Code Extension:** Sidebar for task tracking, plan approval, and hook notifications.
+- [ ] **JSON-RPC Protocol:** Standardize communication between CLI and IDE plugins.
 
 ---
 
-## Phase 5 — Execution adapters (optional)
+## Phase 6 — Distribution & Ecosystem
 
-**Goal:** Enable execution while keeping the core model-agnostic.
+**Goal:** Make agent-scope production-ready.
 
-> Execution is intentionally not part of the core.
-
-- [x] Local execution adapters
-- [x] Remote / API-based execution adapters
-- [ ] CI-friendly non-interactive mode
+- [ ] NPM package publication.
+- [ ] Public documentation site (e.g., Docusaurus/GitBook).
+- [ ] Skill Template Library: Pre-configured skills for React, FastAPI, SQL optimization, etc.
+- [ ] CI release automation.
 
 ---
 
-## Phase 6 — Build system
+## Non-goals
 
-**Goal:** Build system for agents and flows.
+- **Non-AI agents:** Humans are users/approvers, not "agents" in this scope.
+- **Implicit "Magic":** No heuristic behavior; everything must be traceably specified.
+- **Model-Specific Logic:** Maintain provider-agnostic core logic.
 
-> CLI commands
+---
 
-- [x] `agent-scope build`
-- [x] `agent-scope validate`
+## Long-term Vision
 
-> Build system
+**agent-scope** is the infrastructure layer for **Level 3 Agentic Development**.
+It transforms the developer from a coder into an **Agent Manager** who governs AI behavior through explicit contracts, domain boundaries, and rigorous engineering guardrails.
 
-- [x] Create npm package
-- [x] Add build scripts
-- [x] Add release process
-- [ ] Publish on npm registry
-
-> Github pages
-
-- [ ] Add documentation
-
-> CI pipeline
-
-- [ ] Add CI pipeline
-- [ ] Add release process
+**Not a chatbot. Not a framework. A control plane.**
