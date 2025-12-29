@@ -24,7 +24,7 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 - [x] CLI entry point with command routing (help, version)
 - [x] TypeScript configuration with strict compiler options
 - [x] Testing framework with coverage baseline
-- [/] Initial documentation (`README.md`, `ROADMAP.md`, `CONTRIBUTING.md`)
+- [x] Initial documentation (`README.md`, `ROADMAP.md`, `CONTRIBUTING.md`)
 - [x] CI pipeline (tests, lint, typecheck, pre-commit hooks)
 
 ---
@@ -35,21 +35,21 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 ### AI Agents & Roles
 
-- [ ] AI agent definition (name, role, model, scope)
-- [ ] **Agent Memory Blocks:** Support for `AGENTS.md` format (standardized project instructions).
-- [ ] Built-in roles: `developer`, `qa`, `architect`, `reviewer`.
+- [x] AI agent definition (name, role, model, scope)
+- [x] **Agent Memory Blocks:** Support for `AGENTS.md` format (standardized project instructions).
+- [x] Built-in roles: `developer`, `qa`, `architect`, `reviewer`.
 
 ### Reusable Skills (3-Level Architecture)
 
-- [ ] **Level 1 (Metadata):** YAML frontmatter loaded at startup (~100 tokens).
-- [ ] **Level 2 (Instructions):** Markdown-based instructions loaded only when triggered.
+- [x] **Level 1 (Metadata):** YAML frontmatter loaded at startup (~100 tokens).
+- [x] **Level 2 (Instructions):** Markdown-based instructions loaded only when triggered.
 - [ ] **Level 3 (Resources):** External code/docs loaded into context as needed.
 
 ### CLI Commands
 
-- [ ] `agent-scope init`
-- [ ] `agent-scope agent add/list`
-- [ ] `agent-scope skill add`
+- [x] `agent-scope init`
+- [x] `agent-scope agent add/list`
+- [x] `agent-scope skill add`
 
 ---
 

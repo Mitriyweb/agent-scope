@@ -2,24 +2,34 @@ import { Role } from '@/enums/Role';
 import type { RoleMetadata } from '@/types/RoleMetadata';
 
 export const BUILT_IN_ROLES: Record<Role, RoleMetadata> = {
-  [Role.DEVELOPER]: {
-    name: Role.DEVELOPER,
+  [Role.Developer]: {
+    name: Role.Developer,
     description: 'Can read/write code, run tests',
     isBuiltIn: true,
   },
-  [Role.QA]: {
-    name: Role.QA,
+  [Role.Qa]: {
+    name: Role.Qa,
     description: 'Can read code, run tests, report issues',
     isBuiltIn: true,
   },
-  [Role.ARCHITECT]: {
-    name: Role.ARCHITECT,
+  [Role.Architect]: {
+    name: Role.Architect,
     description: 'Can read all, design decisions, review PRs',
     isBuiltIn: true,
   },
-  [Role.REVIEWER]: {
-    name: Role.REVIEWER,
+  [Role.Reviewer]: {
+    name: Role.Reviewer,
     description: 'Can read code, approve changes',
+    isBuiltIn: true,
+  },
+  [Role.Spec]: {
+    name: Role.Spec,
+    description: 'Can write specifications',
+    isBuiltIn: true,
+  },
+  [Role.Unknown]: {
+    name: Role.Unknown,
+    description: 'Fallback for undefined roles',
     isBuiltIn: true,
   },
 };

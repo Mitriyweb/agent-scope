@@ -5,7 +5,7 @@ describe('Agent type', () => {
   it('should create a valid agent', () => {
     const agent: Agent = {
       name: 'backend-dev',
-      role: Role.DEVELOPER,
+      role: Role.Developer,
       scope: {
         patterns: ['src/backend/**'],
         readOnly: false,
@@ -13,7 +13,7 @@ describe('Agent type', () => {
     };
 
     expect(agent.name).toBe('backend-dev');
-    expect(agent.role).toBe(Role.DEVELOPER);
+    expect(agent.role).toBe(Role.Developer);
     expect(agent.scope.patterns).toEqual(['src/backend/**']);
     expect(agent.scope.readOnly).toBe(false);
   });
@@ -21,7 +21,7 @@ describe('Agent type', () => {
   it('should support read-only scope', () => {
     const agent: Agent = {
       name: 'qa-agent',
-      role: Role.QA,
+      role: Role.Qa,
       scope: {
         patterns: ['src/**'],
         readOnly: true,

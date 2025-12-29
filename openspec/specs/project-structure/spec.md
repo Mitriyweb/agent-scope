@@ -3,9 +3,13 @@
 **Feature**: Core Project Infrastructure
 **Status**: DRAFT
 
-## ADDED Requirements
+## Purpose
 
-### Directory Structure
+The Project Structure capability defines the standardized directory layout, development environment, and quality enforcement metrics for the repository.
+
+## Requirements
+
+### Requirement: Directory Structure
 
 The repository SHALL maintain a strict directory structure to separate source code, tests, documentation, and configuration.
 
@@ -23,7 +27,7 @@ The repository SHALL maintain a strict directory structure to separate source co
   - `utils/`
   - `index.ts`
 
-### TypeScript Configuration
+### Requirement: TypeScript Configuration
 
 The project SHALL use strict TypeScript configuration to ensure type safety.
 
@@ -33,7 +37,7 @@ The project SHALL use strict TypeScript configuration to ensure type safety.
 - **THEN** it SHALL pass without errors
 - **AND** `tsconfig.json` SHALL have `strict: true`
 
-### Testing and Coverage
+### Requirement: Testing and Coverage
 
 Code coverage SHALL be enforced at 85% minimum.
 
