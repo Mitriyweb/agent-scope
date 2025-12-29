@@ -71,6 +71,27 @@ Goals:
 - **Explicit validation**: all changes must pass `openspec validate --strict`
 - **Archive after deployment**: completed changes move to `changes/archive/`
 
+### Spec-Driven Development (SDD) Workflow
+
+The project follows a strict SDD workflow to ensure high-fidelity AI orchestration:
+
+1. **Specify**: Define "What" and "Why" in `specs/`. Use `agent-scope specify <name>` to scaffold.
+   - **Validation**: Use `agent-scope specify validate <name>` to check `SHALL/MUST` and Scenarios.
+2. **Plan**: Define "How" in `plans/`. Use `agent-scope plan <name>` to scaffold.
+3. **Task**: Breakdown plans into `tasks.md` in `openspec/changes/<id>/`.
+   - **Tracking**: Use `agent-scope tasks <id>` to view progress.
+   - **Syncing**: Use `agent-scope tasks sync` to update `BACKLOG.md` and `ROADMAP.md`.
+4. **Implement**: Execute specific tasks with targeted, isolated context.
+   - **Execution**: Use `agent-scope implement <id> --task <taskId>`.
+   - **Safety**: `Embedded Plan Mode` is enforced by default.
+
+### Automated Validation
+
+The project provides automated checks to maintain structure and consistency:
+
+- `agent-scope validate structure`: Verifies SDD directory layout and mandatory templates.
+- `agent-scope validate backlog`: Ensures `BACKLOG.md` items align with `ROADMAP.md` goals.
+
 ### Testing Strategy
 
 - **Test-Driven Development**: All code MUST be written with tests from the start

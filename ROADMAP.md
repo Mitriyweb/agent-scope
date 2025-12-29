@@ -68,7 +68,7 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 - [ ] Standardized directory structure: `specs/`, `plans/`, `tasks/`, `contracts/`.
 - [ ] Support for **Embedded Plan Mode**: Agents must present a plan for approval before mutation.
-- [ ] OpenSpec validation for API-first development.
+- [x] OpenSpec validation for API-first development.
 
 ---
 

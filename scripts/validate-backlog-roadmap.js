@@ -95,7 +95,7 @@ class BacklogRoadmapValidator {
 
   extractRoadmapPhases(content) {
     const phases = [];
-    const phaseMatches = content.match(/## Phase \d+ —[^\n]+/g) || [];
+    const phaseMatches = content.match(/## Phase \d+ [—-][^\n]+/g) || [];
 
     phaseMatches.forEach(match => {
       const phaseNumber = match.match(/Phase (\d+)/)[1];
@@ -139,14 +139,14 @@ class BacklogRoadmapValidator {
     // Validate roadmap phase format
     if (item.fields['Roadmap Phase']) {
       const phaseField = item.fields['Roadmap Phase'];
-      if (!phaseField.match(/^Phase \d+ - /)) {
+      if (!phaseField.match(/^Phase \d+ [—-] /)) {
         this.errors.push({
           type: 'invalid_phase_format',
           item: item.title,
           field: 'Roadmap Phase',
           value: phaseField,
           line: item.lineNumber,
-          message: `Invalid roadmap phase format. Expected "Phase X - Name", got "${phaseField}"`,
+          message: `Invalid roadmap phase format. Expected "Phase X - Name" or "Phase X — Name", got "${phaseField}"`,
         });
       }
     }

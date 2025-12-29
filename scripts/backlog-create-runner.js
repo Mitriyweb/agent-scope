@@ -170,7 +170,7 @@ class BacklogCreateRunner {
 
     // Validate phase exists in roadmap
     const roadmapContent = fs.readFileSync('ROADMAP.md', 'utf8');
-    const phasePattern = new RegExp(`## Phase ${this.phaseNumber} —`);
+    const phasePattern = new RegExp(`## Phase ${this.phaseNumber} —[^\n]+`);
     const phaseMatch = roadmapContent.match(phasePattern);
 
     if (!phaseMatch) {
