@@ -2,6 +2,8 @@
 
 Instructions for AI coding assistants using OpenSpec for spec-driven development.
 
+> **Note**: For general coding standards and quality rules, see the main `AGENTS.md` file in project root.
+
 ## TL;DR Quick Checklist
 
 - Search existing work: `openspec spec list --long`, `openspec list` (use `rg` only for full-text search)
@@ -80,6 +82,7 @@ After deployment, create separate PR to:
 - [ ] Read relevant specs in `specs/[capability]/spec.md`
 - [ ] Check pending changes in `changes/` for conflicts
 - [ ] Read `openspec/project.md` for conventions
+- [ ] Follow coding standards from main `AGENTS.md` file
 - [ ] Run `openspec list` to see active changes
 - [ ] Run `openspec list --specs` to see existing capabilities
 

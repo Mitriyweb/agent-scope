@@ -1,8 +1,0 @@
-{
-  "name": "agent-scope-project",
-  "version": "1.0.0",
-  "agents": ["ExampleAgent"],
-  "flows": ["ExampleFlow"],
-  "outputFormat": "json",
-  "outputDir": "dist"
-}
