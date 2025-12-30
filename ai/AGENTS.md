@@ -4,21 +4,26 @@ Agents working in this project MUST follow these rules without exception:
 
 ## 0. Follow Coding Standards
 
-- **MUST** read and follow specialized coding standards in `ai/rules/`:
-  - `project-constants.md` - Core constants and standards (coverage, assertions, etc.)
-  - `typescript-coding-standards.md` - TypeScript rules, imports, type safety
-  - `testing-standards.md` - Test structure, coverage, single assertion rule
-  - `code-quality-tools.md` - Knip, pre-commit hooks, security audits
-  - `documentation-standards.md` - TSDoc, README, changelog requirements
-  - `performance-standards.md` - CLI startup, memory, bundle size limits
-- Standards are also available via symlinks: `.agent/rules/`, `.antigravity/rules/`, `.windsurf/rules/`
-- Complete guidelines available in `CODING_GUIDELINES.md`
+Agents **MUST** read and follow specialized coding standards in the `@/ai/rules/` directory based on the task:
+
+- `project-constants.md` - Core constants and standards (coverage thresholds, naming, etc.)
+- `typescript-coding-standards.md` - TypeScript rules, imports, type safety
+- `testing-standards.md` - Test structure, single assertion rule, coverage requirements
+- `code-quality-tools.md` - Knip, pre-commit hooks, security audits
+- `documentation-standards.md` - TSDoc, README, changelog requirements
+- `performance-standards.md` - CLI startup, memory, bundle size limits
+- `backlog-roadmap-consistency.md` - Rules for keeping BACKLOG.md and ROADMAP.md in sync
+
+### Standards Access
+
+- Detailed rules: `@/ai/rules/` directory
+- Symlinks available: `.agent/rules/`, `.antigravity/rules/`, `.windsurf/rules/`
 
 ## 1. No Skipping Pre-commit Hooks
 
 - **MUST NOT** use `--no-verify` flag with git commit commands
-- All commits must pass pre-commit hooks
-- Hooks enforce code quality standards
+- All commits must pass pre-commit hooks configured in `.pre-commit-config.yaml`
+- Hooks enforce code quality, tests, and coverage standards
 
 ## 2. No Skipping Tests
 
@@ -40,13 +45,13 @@ Agents working in this project MUST follow these rules without exception:
   - Prettier for code formatting
   - markdownlint for Markdown files
   - knip for unused dependencies
-  - Security audit
+  - Security audit (`npm audit`)
 
-## 5. Enforce Pre-commit Hooks
+## 5. Enforce Quality Standards
 
-- All hooks have `always_run: true` in `.pre-commit-config.yaml`
+- Most pre-commit hooks have `always_run: true` to prevent regressions
 - Hooks cannot be bypassed or skipped
-- Commits fail if any check fails (prevents regressions)
+- Commits fail if any check fails
 
 ## Commit Checklist
 
@@ -59,4 +64,4 @@ Before committing, verify:
 - ✓ No unused dependencies: `npm run knip`
 - ✓ Security audit passes: `npm audit`
 - ✓ No `--no-verify` flag used in commit command
-- ✓ Follow coding standards in `ai/rules/`
+- ✓ Follow coding standards in `@/ai/rules/`
