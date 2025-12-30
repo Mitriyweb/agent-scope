@@ -1,7 +1,7 @@
 enum ExecutionStatus {
   Pending = 'pending',
   Running = 'running',
-  Success = 'success',
+  Completed = 'completed',
   Failed = 'failed',
   Timeout = 'timeout',
   Cancelled = 'cancelled',

@@ -64,6 +64,14 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 - [x] **Tasks:** Break down plans into isolated, executable todo-list items.
 - [x] **Implement:** Execute specific tasks with targeted context.
 
+### Multi-Agent SDD Cycle
+
+- [x] **Agent Definitions:** Specialized roles for SDD phases (Architect, Developer, QA, Reviewer)
+- [x] **Agent Templates:** Structured definitions in `ai/agents/` with clear responsibilities and contracts
+- [ ] **Workflow Definitions:** Configurable agent sequences with approval gates
+- [ ] **Dependency Tracking:** System tracks which workflows use which agents
+- [ ] **Template Build System:** Copy agent/workflow templates to dist/ for distribution
+
 ### Artifact Management
 
 - [x] Standardized directory structure: `specs/`, `plans/`, `tasks/`, `contracts/`.
@@ -107,16 +115,6 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 ---
 
-## Phase 5 — Developer Tooling (IDE)
-
-**Goal:** Provide visibility into the agentic "thought" process.
-
-### CLI Diagnostics
-
-- [ ] `agent-scope explain [agent|plan|flow]`
-- [ ] `agent-scope graph`: Visualize the DAG of agent interactions.
-- [ ] Structured validation errors with remediation hints.
-
 ### IDE Integration
 
 - [ ] **VS Code Extension:** Sidebar for task tracking, plan approval, and hook notifications.
@@ -124,7 +122,7 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 ---
 
-## Phase 6 — Distribution & Ecosystem
+## Phase 5 — Distribution & Ecosystem
 
 **Goal:** Make agent-scope production-ready.
 

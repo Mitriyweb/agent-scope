@@ -130,6 +130,56 @@ Handoffs are **explicit and controlled**, never automatic.
 
 ---
 
+## Multi-Agent SDD Cycle
+
+`agent-scope` includes built-in support for **Specification-Driven Development (SDD)** workflows with multiple specialized agents:
+
+### Standard Agent Roles
+
+- **Architect** — Creates technical designs and system architecture
+- **Developer** — Implements features based on specifications
+- **QA** — Writes and validates tests, ensures quality
+- **Reviewer** — Reviews code, specs, and tests for correctness
+
+### SDD Workflow
+
+The SDD cycle follows this pattern:
+
+1. **Architect** creates OpenSpec-compatible requirements and design
+2. **Developer** implements code based on the design
+3. **QA** writes tests and validates implementation
+4. **Reviewer** reviews all artifacts for consistency
+
+Each agent has:
+
+- Defined responsibilities and constraints
+- Clear input/output contracts
+- Success criteria for their work
+
+### Agent Definitions
+
+Agent definitions are stored in `ai/agents/` and include:
+
+- Purpose and scope
+- Responsibilities
+- Constraints and limitations
+- Input/output contracts
+- Success criteria
+
+### Workflow Orchestration
+
+Workflows are defined in `ai/workflows/` and specify:
+
+- Agent execution sequence
+- Approval gates between agents
+- Context handoff rules
+- Integration with OpenSpec
+
+Example workflows:
+
+- `sdd-cycle.md` — Full specification-driven development cycle
+- `implement-feature.md` — Feature implementation with multi-agent coordination
+
 ## Example workflow
 
 1. The `spec` agent produces **OpenSpec-compatible requirements**
