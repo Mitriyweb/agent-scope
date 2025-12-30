@@ -1,12 +1,11 @@
 import { spawn, ChildProcess } from 'child_process';
 import { EventEmitter } from 'events';
 import type { Agent } from '@/types/Agent';
-
-export type ExecutionState = 'pending' | 'running' | 'completed' | 'failed';
+import ExecutionStatus from '@/types/ExecutionStatus';
 
 export interface ExecutionResult {
   agentName: string;
-  state: ExecutionState;
+  state: ExecutionStatus;
   exitCode?: number;
   stdout: string;
   stderr: string;
@@ -28,14 +27,14 @@ export class ExecutionEngine extends EventEmitter {
     const executionId = `${agent.name}-${Date.now()}`;
     const result: ExecutionResult = {
       agentName: agent.name,
-      state: 'pending',
+      state: ExecutionStatus.Pending,
       stdout: '',
       stderr: '',
       startTime: new Date(),
     };
 
     try {
-      result.state = 'running';
+      result.state = ExecutionStatus.Running;
       this.emit('execution:start', { agentName: agent.name, executionId });
 
       const childProcess = spawn('sh', ['-c', command], {
@@ -60,7 +59,7 @@ export class ExecutionEngine extends EventEmitter {
       if (options?.timeout) {
         const timeoutHandle = setTimeout(() => {
           childProcess.kill('SIGTERM');
-          result.state = 'failed';
+          result.state = ExecutionStatus.Failed;
           result.error = new Error(`Execution timeout after ${options.timeout}ms`);
           this.emit('execution:timeout', { executionId, agentName: agent.name });
         }, options.timeout);
@@ -72,7 +71,7 @@ export class ExecutionEngine extends EventEmitter {
       await new Promise<void>((resolve, reject) => {
         childProcess.on('close', (code: number | null) => {
           result.exitCode = code ?? 1;
-          result.state = code === 0 ? 'completed' : 'failed';
+          result.state = code === 0 ? ExecutionStatus.Completed : ExecutionStatus.Failed;
           result.endTime = new Date();
 
           if (code !== 0) {
@@ -84,7 +83,7 @@ export class ExecutionEngine extends EventEmitter {
         });
 
         childProcess.on('error', (error: Error) => {
-          result.state = 'failed';
+          result.state = ExecutionStatus.Failed;
           result.error = error;
           result.endTime = new Date();
           this.emit('execution:error', { executionId, agentName: agent.name, error });
@@ -92,7 +91,7 @@ export class ExecutionEngine extends EventEmitter {
         });
       });
     } catch (error) {
-      result.state = 'failed';
+      result.state = ExecutionStatus.Failed;
       result.error = error instanceof Error ? error : new Error(String(error));
       result.endTime = new Date();
       this.emit('execution:error', { executionId, agentName: agent.name, error });

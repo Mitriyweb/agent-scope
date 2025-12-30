@@ -28,6 +28,45 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
 
 ## Pending Tasks
 
+- [ ] **[MEDIUM]** Implement workflow management commands
+  - **Roadmap Phase**: Phase 2 - Spec-Driven Development (SDD)
+  - **Roadmap Item**: - [ ] **Workflow Definitions:** Configurable agent sequences with approval gates
+  - **Effort**: L
+  - **Description**: As a developer, I want workflow management commands (list, validate, run), so that I can manage multi-agent workflows
+  - **Acceptance Criteria**:
+    - [ ] `agent-scope workflow list` displays all workflows
+    - [ ] `agent-scope workflow validate` checks workflow definitions
+    - [ ] `agent-scope workflow run` executes basic workflow
+  - **Dependencies**: Agent definitions, workflow templates
+  - **OpenSpec Change**: add-multi-agent-sdd-cycle
+  - **Created**: 2025-12-30
+
+- [ ] **[MEDIUM]** Implement agent dependency tracking
+  - **Roadmap Phase**: Phase 2 - Spec-Driven Development (SDD)
+  - **Roadmap Item**: - [ ] **Dependency Tracking:** System tracks which workflows use which agents
+  - **Effort**: M
+  - **Description**: As a developer, I want agent remove to show workflow dependencies, so that I don't accidentally break workflows
+  - **Acceptance Criteria**:
+    - [ ] `agent-scope agent remove` scans workflows for agent usage
+    - [ ] Shows list of workflows using the agent
+    - [ ] Prompts for confirmation before removal
+  - **Dependencies**: Workflow definitions
+  - **OpenSpec Change**: add-multi-agent-sdd-cycle
+  - **Created**: 2025-12-30
+
+- [ ] **[LOW]** Implement template build system
+  - **Roadmap Phase**: Phase 2 - Spec-Driven Development (SDD)
+  - **Roadmap Item**: - [ ] **Template Build System:** Copy agent/workflow templates to dist/ for distribution
+  - **Effort**: S
+  - **Description**: As a developer, I want build process to copy templates, so that they're packaged with the application
+  - **Acceptance Criteria**:
+    - [ ] Build script copies `ai/agents/*.md` to `dist/templates/agents/`
+    - [ ] Build script copies `ai/workflows/*.md` to `dist/templates/workflows/`
+    - [ ] Templates included in npm package
+  - **Dependencies**: Agent and workflow definitions
+  - **OpenSpec Change**: add-multi-agent-sdd-cycle
+  - **Created**: 2025-12-30
+
 - [ ] **[MEDIUM]** Implement Level 3 Resources for Skills
   - **Roadmap Phase**: Phase 1 - Agent Memory & Skills
   - **Roadmap Item**: - [ ] **Level 3 (Resources):** External code/docs loaded into context as needed.
@@ -73,6 +112,22 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
     - [ ] Embedded Plan Mode support in CLI
   - **OpenSpec Change**: add-phase-2-sdd
   - **Created**: 2025-12-29
+
+- [x] **[HIGH]** Create Multi-Agent SDD Cycle Agent Definitions
+  - **Roadmap Phase**: Phase 2 - Spec-Driven Development (SDD)
+  - **Roadmap Item**: Agent Definitions: Specialized roles for SDD phases
+  - **Effort**: M
+  - **Description**: Create agent definitions for Architect, Developer, QA, and Reviewer roles
+  - **Acceptance Criteria**:
+    - [x] Architect agent definition created in `ai/agents/architect.md`
+    - [x] Developer agent definition created in `ai/agents/developer.md`
+    - [x] QA agent definition created in `ai/agents/qa.md`
+    - [x] Reviewer agent definition created in `ai/agents/reviewer.md`
+    - [x] Each definition includes Purpose, Responsibilities, Constraints, Input/Output Contracts, Success Criteria
+    - [x] Documentation created in `docs/AGENT_SCOPE.md`
+  - **OpenSpec Change**: add-multi-agent-sdd-cycle
+  - **Created**: 2025-12-30
+  - **Completed**: 2025-12-30
 
 - [x] **[HIGH]** Implement SDD Workflow: Tasks
   - **Roadmap Phase**: Phase 2 - Spec-Driven Development (SDD)
@@ -173,7 +228,7 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
   - **Created**: 2025-12-29
 
 - [ ] **[LOW]** Prepare NPM Package Publication
-  - **Roadmap Phase**: Phase 6 - Distribution & Ecosystem
+  - **Roadmap Phase**: Phase 5 — Distribution & Ecosystem
   - **Roadmap Item**: NPM package publication
   - **Effort**: S
   - **Description**: As a user, I want to install agent-scope via NPM, so that I can easily use it in my projects

@@ -5,9 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 2025-12-29
+## [Unreleased]
+
+## [0.4.0] - 2025-12-30
 
 ### Added
+
+- Multi-agent SDD cycle infrastructure
+- Agent definitions for specialized roles: Architect, Developer, QA, Reviewer
+- Agent definition files in `ai/agents/` directory with structured templates
+- `OpenSpecDetector` utility for detecting OpenSpec CLI availability
+- `AgentDependencyAnalyzer` for tracking agent usage in workflows
+- Comprehensive agent-scope documentation in `docs/AGENT_SCOPE.md`
+- Multi-agent SDD cycle section in README.md
+- Agent role definitions with clear responsibilities, constraints, input/output contracts, and success criteria
+- TypeScript types and enums for agent-scope commands (`AgentScope.ts`)
+
+### Changed
+
+- Updated ROADMAP.md to reflect Phase 2 completion
+- Updated BACKLOG.md with completed multi-agent tasks
+- Bumped version to 0.4.0
+
+### Technical
+
+- Test coverage: 96.98% (107 tests passing)
+- All TypeScript strict type checking passing
+- No `any` types in production or test code
+
+## [0.1.0] - 2025-12-29
+
+### Features
 
 - Agent memory and skills (Phase 1)
 - `agent-scope init`: Initialize project with `.agent-scope/` and `AGENTS.md`
