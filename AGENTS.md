@@ -22,12 +22,4 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 
 ## Agent Rules
 
-For detailed agent rules and coding standards, see: **`ai/AGENTS.md`**
-
-### Quick Summary
-
-- **Follow coding standards** in `ai/rules/` (TypeScript, testing, quality tools)
-- **Never skip pre-commit hooks** - no `--no-verify` flag
-- **85% test coverage minimum** - non-negotiable baseline
-- **Run full quality checks** before committing
-- **All commits must pass** build, tests, linting, security audit
+For detailed agent rules and coding standards, see: **`@/ai/AGENTS.md`**

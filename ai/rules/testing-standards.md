@@ -149,6 +149,42 @@ npm run coverage:save
 
 ---
 
+## Files That Don't Require Dedicated Tests
+
+The following file types are excluded from requiring separate test files and should be tested through their usage in other components:
+
+### Type Definition Files
+
+- Files containing only TypeScript interfaces, types, or type aliases
+- Example: `src/types/user.ts` with only interface definitions
+- **Testing approach**: Test through usage in components that consume these types
+
+### Enum Files
+
+- Files containing only enum definitions
+- Example: `src/enums/status.ts` with only enum declarations
+- **Testing approach**: Test through usage in functions/classes that use the enums
+
+### Constant Files
+
+- Files containing only constant values or configuration objects
+- Example: `src/constants/api.ts` with only exported constants
+- **Testing approach**: Test through usage in components that consume these constants
+
+### Re-export Files
+
+- Files that only re-export other modules (barrel exports)
+- Example: `src/utils/index.ts` that only contains `export * from './helper'`
+- **Testing approach**: Test the actual implementations being re-exported
+
+### Coverage Impact
+
+- These file types are still included in coverage calculations
+- Coverage is achieved through testing the components that use them
+- Focus testing efforts on the business logic that consumes these definitions
+
+---
+
 ## Test Development Rules
 
 ### Test-Driven Development
