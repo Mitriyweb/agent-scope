@@ -24,11 +24,11 @@ export class ValidateCommand {
   }
 
   private static validateStructure() {
-    const requiredDirs = ['specs', 'plans', 'tasks', 'contracts', 'openspec/changes'];
+    const requiredDirs = ['specs', 'plans', 'contracts', 'openspec/changes', 'openspec/specs'];
     const requiredTemplates = ['specs/template.md', 'plans/template.md'];
     let allValid = true;
 
-    console.log('Validating project structure...');
+    console.log('🔍 Validating project structure...');
 
     requiredDirs.forEach(dir => {
       const p = path.join(process.cwd(), dir);

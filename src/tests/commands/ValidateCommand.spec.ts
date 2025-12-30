@@ -29,7 +29,7 @@ describe('ValidateCommand', () => {
     const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
     // Create required structure
-    ['specs', 'plans', 'tasks', 'contracts', 'openspec/changes'].forEach(dir => {
+    ['specs', 'plans', 'tasks', 'contracts', 'openspec/changes', 'openspec/specs'].forEach(dir => {
       fs.mkdirSync(path.join(testDir, dir), { recursive: true });
     });
     ['specs/template.md', 'plans/template.md'].forEach(template => {
@@ -69,7 +69,7 @@ describe('ValidateCommand', () => {
       });
 
     // Create dirs but no templates
-    ['specs', 'plans', 'tasks', 'contracts', 'openspec/changes'].forEach(dir => {
+    ['specs', 'plans', 'tasks', 'contracts', 'openspec/changes', 'openspec/specs'].forEach(dir => {
       fs.mkdirSync(path.join(testDir, dir), { recursive: true });
     });
 
