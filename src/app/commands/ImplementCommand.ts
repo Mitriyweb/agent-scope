@@ -20,18 +20,39 @@ export class ImplementCommand {
   ) {
     const changeDir = path.join(process.cwd(), 'openspec', 'changes', changeId);
     if (!fs.existsSync(changeDir)) {
-      console.error(`Change ${changeId} not found.`);
-      return;
+      console.error(`❌ Change ${changeId} not found in openspec/changes/`);
+      process.exit(1);
     }
 
+    // Requirement: Implementation Safety
     if (options.planFirst) {
-      console.log('--- SDD: Embedded Plan Mode Enabled ---');
-      console.log('Requirement: Please create a technical plan in plans/ before modifying code.');
+      const planPath = path.join(process.cwd(), 'plans', `${changeId}.md`);
+      if (!fs.existsSync(planPath)) {
+        console.error(`❌ Technical plan missing: plans/${changeId}.md`);
+        console.error(
+          'Requirement: Implementation SHALL NOT proceed without an approved technical plan.'
+        );
+        process.exit(1);
+      }
+      console.log(`✅ Technical plan matched: plans/${changeId}.md`);
     }
 
-    console.log(`Starting implementation for change: ${changeId}`);
+    // Requirement: Task Verification
+    const tasksPath = path.join(changeDir, 'tasks.md');
     if (options.task) {
-      console.log(`Targeting task: ${options.task}`);
+      if (!fs.existsSync(tasksPath)) {
+        console.error(`❌ Tasks file missing: ${changeId}/tasks.md`);
+        process.exit(1);
+      }
+      const tasksContent = fs.readFileSync(tasksPath, 'utf-8');
+      const taskPattern = new RegExp(`^\\s*-\\s*\\[[ x]\\]\\s*${options.task}\\s`, 'm');
+      if (!tasksContent.match(taskPattern)) {
+        console.error(`❌ Task ${options.task} not found in ${changeId}/tasks.md`);
+        process.exit(1);
+      }
+      console.log(`✅ Executing task: ${options.task}`);
     }
+
+    console.log(`🚀 Starting implementation for change: ${changeId}`);
   }
 }

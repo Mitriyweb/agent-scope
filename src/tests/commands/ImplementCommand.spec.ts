@@ -29,11 +29,13 @@ describe('ImplementCommand', () => {
     const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
     const changeId = 'test-change';
     fs.mkdirSync(path.join(testDir, 'openspec', 'changes', changeId), { recursive: true });
+    fs.mkdirSync(path.join(testDir, 'plans'), { recursive: true });
+    fs.writeFileSync(path.join(testDir, 'plans', `${changeId}.md`), 'test plan');
 
     program.parse(['node', 'test', 'implement', changeId]);
 
-    expect(logSpy).toHaveBeenCalledWith('--- SDD: Embedded Plan Mode Enabled ---');
-    expect(logSpy).toHaveBeenCalledWith(`Starting implementation for change: ${changeId}`);
+    expect(logSpy).toHaveBeenCalledWith(`✅ Technical plan matched: plans/${changeId}.md`);
+    expect(logSpy).toHaveBeenCalledWith(`🚀 Starting implementation for change: ${changeId}`);
     logSpy.mockRestore();
   });
 
@@ -41,17 +43,57 @@ describe('ImplementCommand', () => {
     const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
     const changeId = 'test-change';
     fs.mkdirSync(path.join(testDir, 'openspec', 'changes', changeId), { recursive: true });
+    fs.mkdirSync(path.join(testDir, 'plans'), { recursive: true });
+    fs.writeFileSync(path.join(testDir, 'plans', `${changeId}.md`), 'test plan');
+    fs.writeFileSync(
+      path.join(testDir, 'openspec', 'changes', changeId, 'tasks.md'),
+      '- [ ] 1.1 Test task'
+    );
 
     program.parse(['node', 'test', 'implement', changeId, '--task', '1.1']);
 
-    expect(logSpy).toHaveBeenCalledWith('Targeting task: 1.1');
+    expect(logSpy).toHaveBeenCalledWith('✅ Executing task: 1.1');
     logSpy.mockRestore();
   });
 
   it('should fail if change does not exist', () => {
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    program.parse(['node', 'test', 'implement', 'missing-change']);
-    expect(errorSpy).toHaveBeenCalledWith('Change missing-change not found.');
+    const exitSpy = jest
+      .spyOn(process, 'exit')
+      .mockImplementation((code?: string | number | null | undefined): never => {
+        throw new Error(`process.exit: ${code}`);
+      });
+
+    expect(() => {
+      program.parse(['node', 'test', 'implement', 'missing-change']);
+    }).toThrow('process.exit: 1');
+
+    expect(errorSpy).toHaveBeenCalledWith(
+      '❌ Change missing-change not found in openspec/changes/'
+    );
+
     errorSpy.mockRestore();
+    exitSpy.mockRestore();
+  });
+
+  it('should fail if technical plan is missing when plan-first is enabled', () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const exitSpy = jest
+      .spyOn(process, 'exit')
+      .mockImplementation((code?: string | number | null | undefined): never => {
+        throw new Error(`process.exit: ${code}`);
+      });
+
+    const changeId = 'test-change';
+    fs.mkdirSync(path.join(testDir, 'openspec', 'changes', changeId), { recursive: true });
+
+    expect(() => {
+      program.parse(['node', 'test', 'implement', changeId, '--plan-first']);
+    }).toThrow('process.exit: 1');
+
+    expect(errorSpy).toHaveBeenCalledWith(`❌ Technical plan missing: plans/${changeId}.md`);
+
+    errorSpy.mockRestore();
+    exitSpy.mockRestore();
   });
 });

@@ -59,15 +59,15 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 ### Workflow Orchestration
 
-- [ ] **Specify:** Define "What" and "Why" (Requirements, Acceptance Criteria).
-- [ ] **Plan:** Define "How" (Architecture, API contracts) without changing code.
-- [ ] **Tasks:** Break down plans into isolated, executable todo-list items.
-- [ ] **Implement:** Execute specific tasks with targeted context.
+- [x] **Specify:** Define "What" and "Why" (Requirements, Acceptance Criteria).
+- [x] **Plan:** Define "How" (Architecture, API contracts) without changing code.
+- [x] **Tasks:** Break down plans into isolated, executable todo-list items.
+- [x] **Implement:** Execute specific tasks with targeted context.
 
 ### Artifact Management
 
-- [ ] Standardized directory structure: `specs/`, `plans/`, `tasks/`, `contracts/`.
-- [ ] Support for **Embedded Plan Mode**: Agents must present a plan for approval before mutation.
+- [x] Standardized directory structure: `specs/`, `plans/`, `tasks/`, `contracts/`.
+- [x] Support for **Embedded Plan Mode**: Agents must present a plan for approval before mutation.
 - [x] OpenSpec validation for API-first development.
 
 ---

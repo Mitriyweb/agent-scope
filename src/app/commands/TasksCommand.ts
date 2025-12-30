@@ -124,18 +124,15 @@ export class TasksCommand {
 
     completedBacklogItems.forEach(itemLine => {
       // Find "Roadmap Item" field for this item
-      const itemIndex = backlogContent.split('\n').indexOf(itemLine);
+      const backlogLines = backlogContent.split('\n');
+      const itemIndex = backlogLines.indexOf(itemLine);
       let roadmapItemName: string | null = null;
-      for (
-        let j = itemIndex + 1;
-        j < itemIndex + 10 && j < backlogContent.split('\n').length;
-        j++
-      ) {
-        const line = backlogContent.split('\n')[j];
+      for (let j = itemIndex + 1; j < itemIndex + 10 && j < backlogLines.length; j++) {
+        const line = backlogLines[j];
         const match = line.match(/^\s*- \*\*Roadmap Item\*\*:\s*(.*)$/);
         if (match) {
           roadmapItemName = match[1].trim();
-          // Strip leading dash and brackets if present in the field value
+          // Strip leading dash and brackets if present
           roadmapItemName = roadmapItemName.replace(/^- \[[ x]\]\s*/, '').trim();
           break;
         }
@@ -143,11 +140,24 @@ export class TasksCommand {
       }
 
       if (roadmapItemName) {
+        // Requirement: Roadmap Formatting Support
+        // Fuzzy match: strip **, :, and trailing periods/spaces
+        const normalize = (s: string) =>
+          s
+            .replace(/\*\*|:|\.$/g, '')
+            .trim()
+            .toLowerCase();
+        const normalizedTarget = normalize(roadmapItemName);
+
         for (let k = 0; k < roadmapLines.length; k++) {
-          if (roadmapLines[k].includes(roadmapItemName) && roadmapLines[k].includes('- [ ]')) {
-            roadmapLines[k] = roadmapLines[k].replace('- [ ]', '- [x]');
-            updated = true;
-            console.log(`✅ Marked roadmap item as completed: ${roadmapItemName}`);
+          const line = roadmapLines[k];
+          if (line.includes('- [ ]')) {
+            const lineContent = line.replace(/^- \[[ x]\]\s*/, '');
+            if (normalize(lineContent).includes(normalizedTarget)) {
+              roadmapLines[k] = line.replace('- [ ]', '- [x]');
+              updated = true;
+              console.log(`✅ Marked roadmap item as completed: ${roadmapItemName}`);
+            }
           }
         }
       }
