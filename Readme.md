@@ -2,7 +2,7 @@
 
 CLI tool for configuring and orchestrating AI agents in software projects.
 
-`agent-scope` allows you to define AI agent roles (coder, tester, requirements analyst, etc.), strictly limit their context, and explicitly control how context is passed between agents within a project.
+`agent-scope` allows you to define AI agent roles (architect, developer, qa, reviewer), strictly limit their context, and explicitly control how context is passed between agents within a project.
 
 The project is designed for engineering use: predictability, context isolation, reproducibility, and transparency.
 
@@ -28,7 +28,7 @@ Modern AI agents are only effective when their role and context are clearly defi
 
 - 📦 CLI tool installed per project
 - 🧠 Declarative AI agent configuration
-- 🎭 Agent roles (coder, tester, spec, reviewer, etc.)
+- 🎭 Agent roles (architect, developer, qa, reviewer)
 - 📂 Context scoping by directories / files
 - 🔁 Controlled context handoff between agents
 - 🧱 Responsibility isolation
@@ -84,9 +84,9 @@ A role defines:
 
 #### Standard roles
 
+- `architect` — creates technical designs and system architecture
 - `developer` — implements and modifies production code
 - `qa` — writes, validates, and analyzes tests
-- `spec` — produces OpenSpec-compatible specifications
 - `reviewer` — reviews code, specs, and tests for correctness and consistency
 
 #### Custom roles
@@ -182,7 +182,7 @@ Example workflows:
 
 ## Example workflow
 
-1. The `spec` agent produces **OpenSpec-compatible requirements**
+1. The `architect` agent produces **OpenSpec-compatible requirements and design**
 2. The specification is handed off to the `developer` agent
 3. The `developer` implements code within `src/`
 4. The result is passed to the `qa` agent

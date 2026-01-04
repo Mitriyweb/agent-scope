@@ -1,3 +1,7 @@
+---
+description: Create new backlog items and convert them to OpenSpec change proposals.
+---
+
 # Backlog Create Workflow
 
 ## Overview
@@ -25,16 +29,29 @@ read -p "Priority (CRITICAL/HIGH/MEDIUM/LOW): " PRIORITY
 read -p "Estimated effort (XS/S/M/L/XL): " EFFORT
 ```
 
-#### From GitHub Issue
+#### From Local Issue Template
 
 ```bash
-# Extract details from existing GitHub issue
-ISSUE_NUMBER="123"
-gh issue view $ISSUE_NUMBER --json title,body,labels > issue-details.json
+# Create local issue template for manual input
+cat > /tmp/issue-template.md << EOF
+# Issue Title
+[Enter issue title here]
 
-# Parse issue content
-TITLE=$(jq -r '.title' issue-details.json)
-USER_STORY=$(jq -r '.body' issue-details.json | head -n 3)
+# User Story
+As a [role], I want [feature], so that [benefit]
+
+# Priority
+[CRITICAL/HIGH/MEDIUM/LOW]
+
+# Effort Estimate
+[XS/S/M/L/XL]
+
+# Additional Context
+[Any additional context or requirements]
+EOF
+
+echo "📝 Issue template created at /tmp/issue-template.md"
+echo "Please edit the template and run the script again"
 ```
 
 ### 2. Map to Roadmap Phase

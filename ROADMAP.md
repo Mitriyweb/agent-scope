@@ -80,7 +80,48 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 ---
 
-## Phase 3 — Execution Engine & Guardrails
+## Phase 3 — Enhanced Specification & Design System
+
+**Goal:** Strengthen design documentation and validation to support multi-agent SDD workflows.
+
+### Algorithm Specifications
+
+- [ ] **Pseudocode Format:** Support structured, numbered pseudocode in specifications for complex logic
+- [ ] **Language-Agnostic Descriptions:** Enable algorithm documentation readable by non-programmers
+- [ ] **Agent Guidelines:** Add `ai/rules/algorithm-specs.md` for agents writing logic descriptions
+- [ ] **Reviewer Accessibility:** Allow `reviewer` agents to validate logic without code knowledge
+
+### Hierarchical Design Documents
+
+- [ ] **System Architecture:** Establish `architecture/SYSTEM.md` for overall agent-scope architecture
+- [ ] **Feature Blueprints:** Create `architecture/features/{feature-name}/` for feature-specific designs
+- [ ] **Visual Documentation:** Support diagrams in `architecture/diagrams/` (Mermaid, architecture charts)
+- [ ] **OpenSpec Integration:** Link architecture documents with corresponding `openspec/` changes
+
+### Command Interface Contracts
+
+- [ ] **CLI Contract Specs:** Define formal contracts for `agent-scope` commands in `specs/commands/`
+- [ ] **Behavior Validation:** Automated validation that CLI matches its specification
+- [ ] **Agent-Readable Specs:** Command specs in YAML/JSON format agents can parse
+- [ ] **Contract-First Development:** Commands specified before implementation
+
+### Architecture Validation
+
+- [ ] **Validation Workflow:** Create `ai/workflows/validate-architecture.md` for architecture review
+- [ ] **Consistency Checks:** Automated verification between system and feature designs
+- [ ] **Completeness Gates:** Ensure all features have corresponding architecture documentation
+- [ ] **Multi-Agent Review:** Architecture validation by `architect` → `reviewer` agent handoff
+
+### Project-Specific Customization
+
+- [ ] **Template Framework:** Support for project templates in `templates/{language}/`
+- [ ] **Custom Agent Definitions:** Allow projects to extend standard agent roles
+- [ ] **Workflow Extensions:** Enable custom workflows in `.agent-scope/workflows/`
+- [ ] **Template Distribution:** Package and share templates across projects
+
+---
+
+## Phase 4 — Execution Engine & Guardrails
 
 **Goal:** Execute agents with strict safety and quality checks.
 
@@ -98,14 +139,14 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 ---
 
-## Phase 4 — Advanced Context Engineering
+## Phase 5 — Advanced Context Engineering
 
 **Goal:** Mitigate "Context Rot" and "Task Drift" in complex systems.
 
 ### Context Isolation
 
 - [ ] **Subagent Sandboxing:** Execute specialized subtasks in completely isolated contexts.
-- [ ] **Domain-Driven Scoping:** Bound an agent’s context strictly to a specific DDD module or Hexagonal layer.
+- [ ] **Domain-Driven Scoping:** Bound an agent's context strictly to a specific DDD module or Hexagonal layer.
 - [ ] **Semantic Ignorance:** Use `.agentignore` to filter noise (logs, build artifacts, sensitive data).
 
 ### Structured Knowledge
@@ -115,6 +156,10 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 ---
 
+## Phase 6 — Developer Tooling (IDE)
+
+**Goal:** Integrate with development environments and provide enhanced tooling.
+
 ### IDE Integration
 
 - [ ] **VS Code Extension:** Sidebar for task tracking, plan approval, and hook notifications.
@@ -122,7 +167,7 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 ---
 
-## Phase 5 — Distribution & Ecosystem
+## Phase 7 — Distribution & Ecosystem
 
 **Goal:** Make agent-scope production-ready.
 

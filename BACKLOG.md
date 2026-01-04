@@ -28,6 +28,74 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
 
 ## Pending Tasks
 
+### Phase 3 — Enhanced Specification & Design System
+
+- [ ] **[MEDIUM]** Implement Algorithm Specification Support
+  - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
+  - **Roadmap Item**: Algorithm Specifications
+  - **Effort**: M
+  - **Description**: As an architect, I want to describe algorithms in structured pseudocode, so that reviewers can validate logic without code knowledge
+  - **Acceptance Criteria**:
+    - [ ] Add `ai/rules/algorithm-specs.md` with guidelines for writing pseudocode
+    - [ ] Support numbered pseudocode format in specification files
+    - [ ] Document language-agnostic description patterns
+  - **Dependencies**: None
+  - **Created**: 2026-01-04
+
+- [ ] **[HIGH]** Create Hierarchical Design Documentation Structure
+  - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
+  - **Roadmap Item**: Hierarchical Design Documents
+  - **Effort**: M
+  - **Description**: As a developer, I want system and feature-level architecture documentation, so that designs are clearly organized
+  - **Acceptance Criteria**:
+    - [ ] Create `architecture/SYSTEM.md` for overall architecture
+    - [ ] Establish `architecture/features/{feature-name}/` structure
+    - [ ] Add support for Mermaid diagrams in `architecture/diagrams/`
+    - [ ] Link architecture docs with corresponding OpenSpec changes
+  - **Dependencies**: None
+  - **Created**: 2026-01-04
+
+- [ ] **[MEDIUM]** Implement Command Interface Contract System
+  - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
+  - **Roadmap Item**: Command Interface Contracts
+  - **Effort**: L
+  - **Description**: As a developer, I want formal CLI command contracts, so that commands are specified before implementation
+  - **Acceptance Criteria**:
+    - [ ] Create `specs/commands/` directory structure
+    - [ ] Define YAML/JSON contract format for commands
+    - [ ] Implement automated validation of CLI behavior against contracts
+    - [ ] Document contract-first development workflow
+  - **Dependencies**: None
+  - **Created**: 2026-01-04
+
+- [ ] **[MEDIUM]** Create Architecture Validation Workflow
+  - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
+  - **Roadmap Item**: Architecture Validation
+  - **Effort**: M
+  - **Description**: As an architect, I want automated architecture validation, so that designs are reviewed before implementation
+  - **Acceptance Criteria**:
+    - [ ] Create `ai/workflows/validate-architecture.md`
+    - [ ] Implement consistency checks between system and feature designs
+    - [ ] Add completeness gates for architecture documentation
+    - [ ] Support multi-agent review (architect → reviewer handoff)
+  - **Dependencies**: Hierarchical design documentation
+  - **Created**: 2026-01-04
+
+- [ ] **[LOW]** Implement Project Template Framework
+  - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
+  - **Roadmap Item**: Project-Specific Customization
+  - **Effort**: L
+  - **Description**: As a user, I want project templates, so that I can customize agent-scope for different languages/frameworks
+  - **Acceptance Criteria**:
+    - [ ] Create `templates/{language}/` directory structure
+    - [ ] Support custom agent definitions per project
+    - [ ] Enable workflow extensions in `.agent-scope/workflows/`
+    - [ ] Implement template packaging and distribution
+  - **Dependencies**: None
+  - **Created**: 2026-01-04
+
+### Other Pending Tasks
+
 - [ ] **[MEDIUM]** Implement workflow management commands
   - **Roadmap Phase**: Phase 2 - Spec-Driven Development (SDD)
   - **Roadmap Item**: - [ ] **Workflow Definitions:** Configurable agent sequences with approval gates
@@ -189,7 +257,7 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
 ### Low Priority
 
 - [ ] **[LOW]** Implement PreToolUse Hook System
-  - **Roadmap Phase**: Phase 3 - Execution Engine & Guardrails
+  - **Roadmap Phase**: Phase 4 - Execution Engine & Guardrails
   - **Roadmap Item**: PreToolUse: Intercept and block dangerous commands or sensitive file access
   - **Effort**: M
   - **Description**: As a developer, I want PreToolUse hooks to intercept dangerous commands, so that agents cannot perform unsafe operations
@@ -202,7 +270,7 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
   - **Created**: 2025-12-29
 
 - [ ] **[LOW]** Implement Context Isolation for Subagents
-  - **Roadmap Phase**: Phase 4 - Advanced Context Engineering
+  - **Roadmap Phase**: Phase 5 — Advanced Context Engineering
   - **Roadmap Item**: Subagent Sandboxing: Execute specialized subtasks in completely isolated contexts
   - **Effort**: L
   - **Description**: As a developer, I want subagent context isolation, so that specialized subtasks don't interfere with each other
@@ -210,12 +278,12 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
     - [ ] Subagent sandboxing architecture designed
     - [ ] Context isolation mechanisms implemented
     - [ ] Subtask execution boundaries enforced
-  - **Dependencies**: Phase 3 Hook System
+  - **Dependencies**: Phase 4 Hook System
   - **OpenSpec Change**: implement-context-isolation-for-subagents
   - **Created**: 2025-12-29
 
 - [ ] **[LOW]** Implement CLI Diagnostics Commands
-  - **Roadmap Phase**: Phase 5 - Developer Tooling (IDE)
+  - **Roadmap Phase**: Phase 6 — Developer Tooling (IDE)
   - **Roadmap Item**: agent-scope explain [agent|plan|flow]
   - **Effort**: M
   - **Description**: As a developer, I want CLI diagnostic commands, so that I can understand agent behavior and troubleshoot issues
@@ -223,12 +291,12 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
     - [ ] `agent-scope explain` command implemented
     - [ ] Agent behavior visualization added
     - [ ] Flow analysis and reporting features
-  - **Dependencies**: Phase 4 Context Engineering
+  - **Dependencies**: Phase 5 Context Engineering
   - **OpenSpec Change**: implement-cli-diagnostics-commands
   - **Created**: 2025-12-29
 
 - [ ] **[LOW]** Prepare NPM Package Publication
-  - **Roadmap Phase**: Phase 5 — Distribution & Ecosystem
+  - **Roadmap Phase**: Phase 7 — Distribution & Ecosystem
   - **Roadmap Item**: NPM package publication
   - **Effort**: S
   - **Description**: As a user, I want to install agent-scope via NPM, so that I can easily use it in my projects
@@ -236,7 +304,7 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
     - [ ] Package.json configured for publication
     - [ ] Build and distribution pipeline setup
     - [ ] NPM publishing workflow automated
-  - **Dependencies**: Phase 5 IDE Integration
+  - **Dependencies**: Phase 6 IDE Integration
   - **OpenSpec Change**: prepare-npm-package-publication
   - **Created**: 2025-12-29
 
@@ -247,3 +315,16 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
 ---
 
 ## Completed
+
+- [x] **[HIGH]** Update Agent Role References in Documentation
+  - **Roadmap Phase**: Phase 1 - Agent Memory & Skills
+  - **Roadmap Item**: Built-in roles: developer, qa, architect, reviewer
+  - **Effort**: XS
+  - **Description**: As a developer, I want accurate agent role references, so that documentation reflects actual implementation
+  - **Acceptance Criteria**:
+    - [x] Removed references to non-existent roles (coder, tester, spec, analyst, product)
+    - [x] Updated README.md to reference only existing roles
+    - [x] Verified ai/AGENTS.md and openspec/AGENTS.md have no invalid roles
+  - **OpenSpec Change**: update-agent-role-references
+  - **Created**: 2026-01-04
+  - **Completed**: 2026-01-04

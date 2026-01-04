@@ -1,3 +1,7 @@
+---
+description: Synchronize BACKLOG.md with GitHub issues and ROADMAP.md
+---
+
 # Backlog Sync Workflow
 
 ## Overview
@@ -12,239 +16,206 @@ This workflow synchronizes the local `BACKLOG.md` with GitHub issues and ensures
 
 ## Workflow Steps
 
-### 1. Fetch GitHub Issues
+### 1. Analyze Local Backlog
 
 ```bash
-# Get all enhancement issues
-gh issue list --label enhancement --json number,title,body,state,labels --limit 100 > /tmp/github-issues.json
+# Extract existing backlog items without external dependencies
+echo "📊 Analyzing current backlog..."
+grep -c "^- \[ \]" BACKLOG.md | xargs echo "Pending items:"
+grep -c "^- \[x\]" BACKLOG.md | xargs echo "Completed items:"
 
-# Get all bug reports
-gh issue list --label bug --json number,title,body,state,labels --limit 100 > /tmp/github-bugs.json
+# Show priority distribution
+echo "Priority distribution:"
+grep "^- \[ \].*\[CRITICAL\]" BACKLOG.md | wc -l | xargs echo "CRITICAL:"
+grep "^- \[ \].*\[HIGH\]" BACKLOG.md | wc -l | xargs echo "HIGH:"
+grep "^- \[ \].*\[MEDIUM\]" BACKLOG.md | wc -l | xargs echo "MEDIUM:"
+grep "^- \[ \].*\[LOW\]" BACKLOG.md | wc -l | xargs echo "LOW:"
 ```
 
-### 2. Analyze Current Backlog
+### 2. Validate Roadmap Consistency
 
 ```bash
-# Extract existing backlog items
-node -e "
-const fs = require('fs');
-const content = fs.readFileSync('BACKLOG.md', 'utf8');
-const items = content.match(/^- \[[ x]\] \*\*\[.*?\]\*\* .*/gm) || [];
-console.log('Current backlog items:', items.length);
-items.forEach((item, i) => console.log(\`\${i+1}. \${item}\`));
-"
+# Check if all backlog items map to valid roadmap phases
+echo "🔍 Validating roadmap consistency..."
+
+# Extract roadmap phases
+grep "^## Phase" ROADMAP.md > /tmp/roadmap-phases.txt
+
+# Check for unmapped items
+echo "Checking for items without roadmap mapping..."
+grep -n "Roadmap Phase.*\[.*\]" BACKLOG.md || echo "✅ All items have roadmap phases"
+
+# Validate phase references exist
+echo "Validating phase references..."
+while IFS= read -r line; do
+  phase=$(echo "$line" | sed 's/.*Roadmap Phase.*: \(.*\)/\1/')
+  if ! grep -q "$phase" /tmp/roadmap-phases.txt; then
+    echo "⚠️  Invalid phase reference: $phase"
+  fi
+done < <(grep "Roadmap Phase:" BACKLOG.md)
 ```
 
-### 3. Identify Missing Issues
+### 3. Check for Incomplete Items
 
 ```bash
-# Compare GitHub issues with backlog items
-node scripts/compare-issues-backlog.js
+# Find items missing required fields
+echo "🔍 Checking for incomplete backlog items..."
+
+# Check for items without effort estimates
+echo "Items without effort estimates:"
+grep -n "^- \[ \]" BACKLOG.md | while read -r line; do
+  line_num=$(echo "$line" | cut -d: -f1)
+  if ! sed -n "${line_num},/^- \[/p" BACKLOG.md | grep -q "Effort:"; then
+    echo "Line $line_num: $(echo "$line" | cut -d: -f2-)"
+  fi
+done
+
+# Check for items without descriptions
+echo "Items without descriptions:"
+grep -n "^- \[ \]" BACKLOG.md | while read -r line; do
+  line_num=$(echo "$line" | cut -d: -f1)
+  if ! sed -n "${line_num},/^- \[/p" BACKLOG.md | grep -q "Description:"; then
+    echo "Line $line_num: $(echo "$line" | cut -d: -f2-)"
+  fi
+done
 ```
 
-### 4. Add Missing Enhancement Issues
-
-For each missing enhancement issue:
-
-```markdown
-## Add to BACKLOG.md
-
-- [ ] **[MEDIUM]** Issue title from GitHub
-  - **Issue**: #123
-  - **Roadmap Phase**: [Determine based on issue content]
-  - **Roadmap Item**: [Map to specific roadmap bullet]
-  - **Effort**: [Estimate: XS/S/M/L/XL]
-  - **Description**: [Summary from issue body]
-  - **Labels**: [GitHub labels]
-  - **Created**: [Issue creation date]
-```
-
-### 5. Update Bug Tracking
-
-For bug reports, add to separate section:
-
-```markdown
-## Bugs and Technical Debt
-
-- [ ] **[HIGH]** Bug title from GitHub
-  - **Issue**: #456
-  - **Severity**: [Critical/High/Medium/Low]
-  - **Effort**: [Estimate for fix]
-  - **Component**: [Affected system component]
-  - **Created**: [Issue creation date]
-```
-
-### 6. Validate Consistency
+### 4. Generate Sync Report
 
 ```bash
-# Run validation checks
-npm run backlog:validate
+# Create a comprehensive sync report
+echo "📋 Generating backlog sync report..."
 
-# Sync roadmap status
-npm run roadmap:sync-status --dry-run
+cat > backlog-sync-report.md << EOF
+# Backlog Sync Report - $(date +%Y-%m-%d)
+
+## Summary
+
+- **Total Items**: $(grep -c "^- \[" BACKLOG.md)
+- **Pending**: $(grep -c "^- \[ \]" BACKLOG.md)
+- **Completed**: $(grep -c "^- \[x\]" BACKLOG.md)
+
+## Priority Distribution
+
+- **CRITICAL**: $(grep -c "^- \[ \].*\[CRITICAL\]" BACKLOG.md)
+- **HIGH**: $(grep -c "^- \[ \].*\[HIGH\]" BACKLOG.md)
+- **MEDIUM**: $(grep -c "^- \[ \].*\[MEDIUM\]" BACKLOG.md)
+- **LOW**: $(grep -c "^- \[ \].*\[LOW\]" BACKLOG.md)
+
+## Phase Distribution
+
+$(grep "Roadmap Phase:" BACKLOG.md | sort | uniq -c | sort -nr)
+
+## Recommendations
+
+- Review items without effort estimates
+- Validate roadmap phase mappings
+- Consider priority adjustments based on current project needs
+
+EOF
+
+echo "✅ Report generated: backlog-sync-report.md"
 ```
 
-### 7. Create Pull Request
+## Local Automation Scripts
+
+### Validation Script
 
 ```bash
-# Create branch for backlog updates
-git checkout -b backlog-sync-$(date +%Y%m%d)
+#!/bin/bash
+# validate-backlog.sh
 
-# Add changes
-git add BACKLOG.md
+echo "🔍 Validating backlog..."
 
-# Commit with descriptive message
-git commit -m "feat: sync backlog with GitHub issues
+# Check file exists
+if [ ! -f "BACKLOG.md" ]; then
+  echo "❌ BACKLOG.md not found"
+  exit 1
+fi
 
-- Added [X] new enhancement issues
-- Added [Y] new bug reports
-- Updated priority classifications
-- Validated roadmap consistency
+# Check roadmap exists
+if [ ! -f "ROADMAP.md" ]; then
+  echo "❌ ROADMAP.md not found"
+  exit 1
+fi
 
-Issues synced: #123, #456, #789"
+# Validate phase references
+echo "Checking roadmap phase references..."
+grep "^## Phase" ROADMAP.md > /tmp/valid-phases.txt
 
-# Push and create PR
-git push origin backlog-sync-$(date +%Y%m%d)
-gh pr create --title "Sync backlog with GitHub issues" --body "Automated sync of BACKLOG.md with GitHub issues"
-```
+invalid_count=0
+while IFS= read -r line; do
+  phase=$(echo "$line" | sed 's/.*Roadmap Phase.*: \(.*\)/\1/')
+  if ! grep -q "$phase" /tmp/valid-phases.txt; then
+    echo "⚠️  Invalid phase: $phase"
+    ((invalid_count++))
+  fi
+done < <(grep "Roadmap Phase:" BACKLOG.md)
 
-## Automation Triggers
+if [ $invalid_count -eq 0 ]; then
+  echo "✅ All phase references are valid"
+else
+  echo "❌ Found $invalid_count invalid phase references"
+fi
 
-### Weekly Sync (Scheduled)
+# Check for required fields
+echo "Checking for required fields..."
+missing_effort=$(grep -c "Effort.*\[.*\]" BACKLOG.md)
+if [ $missing_effort -gt 0 ]; then
+  echo "⚠️  $missing_effort items missing effort estimates"
+fi
 
-```yaml
-# .github/workflows/backlog-sync-weekly.yml
-name: Weekly Backlog Sync
-
-on:
-  schedule:
-    - cron: '0 9 * * MON' # Every Monday at 9 AM
-  workflow_dispatch: # Manual trigger
-
-jobs:
-  sync-backlog:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run backlog sync workflow
-        run: |
-          # Execute workflow steps
-          node ai/workflows/backlog-sync-runner.js
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'feat: automated backlog sync'
-          title: 'Automated Backlog Sync - Week of ${{ github.run_id }}'
-          body: |
-            Automated synchronization of BACKLOG.md with GitHub issues.
-
-            **Changes:**
-            - Synced enhancement issues with backlog
-            - Updated bug tracking section
-            - Validated roadmap consistency
-
-            **Review Required:**
-            - [ ] Verify issue priorities are correct
-            - [ ] Check roadmap phase mappings
-            - [ ] Confirm effort estimates
-          branch: backlog-sync-${{ github.run_id }}
-```
-
-### Issue-Triggered Sync
-
-```yaml
-# .github/workflows/backlog-sync-on-issue.yml
-name: Backlog Sync on Issue
-
-on:
-  issues:
-    types: [opened, labeled, closed]
-
-jobs:
-  update-backlog:
-    runs-on: ubuntu-latest
-    if: contains(github.event.issue.labels.*.name, 'enhancement') || contains(github.event.issue.labels.*.name, 'bug')
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Add issue to backlog
-        run: |
-          # Determine issue type and priority
-          ISSUE_TYPE="enhancement"
-          PRIORITY="MEDIUM"
-
-          if [[ "${{ github.event.issue.labels }}" == *"bug"* ]]; then
-            ISSUE_TYPE="bug"
-            PRIORITY="HIGH"
-          fi
-
-          # Add to appropriate section in BACKLOG.md
-          node scripts/add-issue-to-backlog.js \
-            --issue-number="${{ github.event.issue.number }}" \
-            --issue-title="${{ github.event.issue.title }}" \
-            --issue-type="$ISSUE_TYPE" \
-            --priority="$PRIORITY"
-
-      - name: Validate and create PR
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'feat: add issue #${{ github.event.issue.number }} to backlog'
-          title: 'Add issue to backlog: ${{ github.event.issue.title }}'
-          body: |
-            Automatically adds issue #${{ github.event.issue.number }} to the backlog.
-
-            **Issue Details:**
-            - Number: #${{ github.event.issue.number }}
-            - Title: ${{ github.event.issue.title }}
-            - Type: ${{ github.event.issue.labels }}
-            - State: ${{ github.event.issue.state }}
-
-            **Action Required:**
-            - [ ] Review and adjust priority level
-            - [ ] Map to appropriate roadmap phase
-            - [ ] Estimate effort level
-          branch: backlog-issue-${{ github.event.issue.number }}
+echo "✅ Validation complete"
 ```
 
 ## Manual Execution
 
-### Quick Sync
+### Quick Local Sync
 
 ```bash
-# Run the workflow manually
-npm run workflow:backlog-sync
+# Run the workflow manually (local version)
+echo "🔄 Running local backlog sync..."
 
-# Or step by step:
-gh issue list --label enhancement --json number,title,body > issues.json
-node scripts/sync-backlog-with-issues.js
-npm run backlog:validate
+# Step 1: Analyze current backlog
+grep -c "^- \[ \]" BACKLOG.md | xargs echo "Pending items:"
+grep -c "^- \[x\]" BACKLOG.md | xargs echo "Completed items:"
+
+# Step 2: Validate roadmap consistency
+grep "^## Phase" ROADMAP.md > /tmp/roadmap-phases.txt
+echo "Validating roadmap phase references..."
+
+# Step 3: Check for incomplete items
+echo "Checking for incomplete items..."
+grep -n "^- \[ \]" BACKLOG.md | head -5
+
+# Step 4: Generate report
+echo "Generating sync report..."
+echo "# Backlog Status - $(date)" > backlog-status.md
+echo "Total pending: $(grep -c "^- \[ \]" BACKLOG.md)" >> backlog-status.md
+echo "Total completed: $(grep -c "^- \[x\]" BACKLOG.md)" >> backlog-status.md
+
+echo "✅ Local sync complete. Check backlog-status.md for details."
 ```
 
 ### Interactive Mode
 
 ```bash
-# Interactive backlog management
-npm run backlog:interactive
+# Interactive backlog management (local)
+echo "🔧 Interactive backlog management"
+echo "1. Show current status"
+echo "2. Validate roadmap consistency"
+echo "3. Find incomplete items"
+echo "4. Generate detailed report"
 
-# This will:
-# 1. Show current backlog status
-# 2. List new GitHub issues
-# 3. Prompt for priority and roadmap mapping
-# 4. Update BACKLOG.md
-# 5. Validate consistency
+read -p "Select option (1-4): " option
+
+case $option in
+  1) grep -c "^- \[" BACKLOG.md | xargs echo "Total items:" ;;
+  2) echo "Validating..."; grep "Roadmap Phase:" BACKLOG.md | sort | uniq ;;
+  3) echo "Finding incomplete items..."; grep -n "^- \[ \].*\[To be defined\]" BACKLOG.md ;;
+  4) echo "Generating report..."; ./generate-backlog-report.sh ;;
+  *) echo "Invalid option" ;;
+esac
 ```
 
 ## Quality Gates
@@ -253,87 +224,90 @@ npm run backlog:interactive
 
 - [ ] BACKLOG.md exists and is valid markdown
 - [ ] ROADMAP.md exists and has proper phase structure
-- [ ] GitHub CLI is authenticated
-- [ ] No uncommitted changes in working directory
+- [ ] No uncommitted changes in working directory (optional)
 
 ### Post-Sync Validation
 
-- [ ] All new issues have required fields
+- [ ] All items have required fields (title, priority, effort, description)
 - [ ] Roadmap phase mappings are valid
-- [ ] Effort estimates are provided
-- [ ] No duplicate entries created
+- [ ] No duplicate entries exist
 - [ ] Consistency validation passes
 
 ### Error Handling
 
 ```bash
-# If sync fails, rollback changes
-git checkout -- BACKLOG.md
+# If sync fails, create backup
+cp BACKLOG.md BACKLOG.md.backup
 
 # Log errors for investigation
 echo "Sync failed at $(date): $ERROR_MESSAGE" >> .backlog-sync.log
 
-# Notify team of sync issues
-gh issue create --title "Backlog sync failed" --body "Automated sync encountered errors. See logs for details."
+# Restore from backup if needed
+if [ -f BACKLOG.md.backup ]; then
+  echo "Restoring from backup..."
+  cp BACKLOG.md.backup BACKLOG.md
+fi
 ```
 
 ## Success Metrics
 
 ### Sync Effectiveness
 
-- **Coverage**: % of GitHub issues represented in backlog
-- **Freshness**: Time between issue creation and backlog inclusion
-- **Accuracy**: % of issues with correct priority/effort estimates
+- **Completeness**: % of backlog items with all required fields
+- **Consistency**: % of items with valid roadmap phase mappings
+- **Accuracy**: % of effort estimates that seem reasonable
 
 ### Process Efficiency
 
-- **Automation Rate**: % of syncs completed without manual intervention
-- **Error Rate**: % of syncs that fail or require rollback
-- **Review Time**: Average time to review and merge sync PRs
+- **Validation Rate**: % of syncs that pass all validation checks
+- **Error Rate**: % of syncs that fail or require manual intervention
+- **Maintenance Time**: Time spent on backlog maintenance per week
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **GitHub API Rate Limits**
+1. **Invalid Roadmap Phase References**
 
    ```bash
-   # Check rate limit status
-   gh api rate_limit
-
-   # Use pagination for large repos
-   gh issue list --limit 100 --page 1
-   ```
-
-2. **Merge Conflicts**
-
-   ```bash
-   # Resolve conflicts in BACKLOG.md
-   git status
-   git add BACKLOG.md
-   git commit -m "resolve: backlog sync conflicts"
-   ```
-
-3. **Invalid Roadmap Mappings**
-
-   ```bash
-   # Validate roadmap phases exist
-   npm run roadmap:validate-phases
+   # Verify phase exists
+   grep "## Phase" ROADMAP.md
 
    # Fix mapping in BACKLOG.md
+   vim BACKLOG.md
+   ```
+
+2. **Missing Required Fields**
+
+   ```bash
+   # Find items missing effort estimates
+   grep -n "^- \[ \]" BACKLOG.md | while read line; do
+     if ! echo "$line" | grep -q "Effort:"; then
+       echo "Missing effort: $line"
+     fi
+   done
+   ```
+
+3. **Inconsistent Formatting**
+
+   ```bash
+   # Check for formatting issues
+   grep -n "^- \[ \]" BACKLOG.md | grep -v "\*\*\[.*\]\*\*"
+
+   # Fix formatting manually
    vim BACKLOG.md
    ```
 
 ### Recovery Procedures
 
 1. **Failed Sync Recovery**
-   - Rollback BACKLOG.md changes
-   - Check error logs
-   - Fix underlying issue
-   - Re-run sync manually
+   - Restore BACKLOG.md from backup
+   - Check error logs in .backlog-sync.log
+   - Fix underlying issue manually
+   - Re-run sync with corrected data
 
 2. **Data Consistency Issues**
-   - Run full validation suite
-   - Compare with last known good state
+   - Run manual validation checks
+   - Compare with ROADMAP.md phases
    - Manually reconcile differences
    - Update validation rules if needed
