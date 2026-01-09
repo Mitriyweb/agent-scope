@@ -4,7 +4,7 @@ import * as path from 'path';
 
 describe('SkillLoader', () => {
   const testDir = path.join(__dirname, 'test-skills');
-  const agentScopeDir = path.join(testDir, '.agent-scope', 'skills');
+  const agentScopeDir = path.join(testDir, '.agent', 'skills');
 
   beforeEach(() => {
     if (fs.existsSync(testDir)) {

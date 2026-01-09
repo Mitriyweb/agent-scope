@@ -82,21 +82,22 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 ## Phase 3 — Enhanced Specification & Design System
 
-**Goal:** Strengthen design documentation and validation to support multi-agent SDD workflows.
+**Goal:** Strengthen design documentation and validation to support multi-agent SDD workflows (Logic Flow-inspired).
 
 ### Algorithm Specifications
 
-- [ ] **Pseudocode Format:** Support structured, numbered pseudocode in specifications for complex logic
+- [/] **Pseudocode Format:** Support structured, numbered pseudocode (Logic Flow) in specifications for complex logic
 - [ ] **Language-Agnostic Descriptions:** Enable algorithm documentation readable by non-programmers
-- [ ] **Agent Guidelines:** Add `ai/rules/algorithm-specs.md` for agents writing logic descriptions
+- [x] **Agent Guidelines:** Add `ai/rules/algorithm-specs.md` for agents writing logic descriptions
 - [ ] **Reviewer Accessibility:** Allow `reviewer` agents to validate logic without code knowledge
 
 ### Hierarchical Design Documents
 
-- [ ] **System Architecture:** Establish `architecture/SYSTEM.md` for overall agent-scope architecture
-- [ ] **Feature Blueprints:** Create `architecture/features/{feature-name}/` for feature-specific designs
+- [x] **Business Context Layer:** Establish `architecture/BUSINESS.md` for high-level vision and actors
+- [x] **System Architecture:** Establish `architecture/DESIGN.md` for overall architecture and domain model
+- [x] **Feature Blueprints:** Create `architecture/features/{feature-name}/` for feature-specific designs
 - [ ] **Visual Documentation:** Support diagrams in `architecture/diagrams/` (Mermaid, architecture charts)
-- [ ] **OpenSpec Integration:** Link architecture documents with corresponding `openspec/` changes
+- [x] **Features Manifest:** Track all capabilities in `architecture/features/FEATURES.md`
 
 ### Command Interface Contracts
 
@@ -105,18 +106,19 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 - [ ] **Agent-Readable Specs:** Command specs in YAML/JSON format agents can parse
 - [ ] **Contract-First Development:** Commands specified before implementation
 
-### Architecture Validation
+### Architecture Validation (Logic Flow-Style)
 
-- [ ] **Validation Workflow:** Create `ai/workflows/validate-architecture.md` for architecture review
+- [x] **Validation Workflows:** Create `ai/workflows/` for business, design, and feature validation
 - [ ] **Consistency Checks:** Automated verification between system and feature designs
 - [ ] **Completeness Gates:** Ensure all features have corresponding architecture documentation
+- [ ] **Scoring System:** Implement validation scoring (90/100 threshold for design)
 - [ ] **Multi-Agent Review:** Architecture validation by `architect` → `reviewer` agent handoff
 
 ### Project-Specific Customization
 
 - [ ] **Template Framework:** Support for project templates in `templates/{language}/`
 - [ ] **Custom Agent Definitions:** Allow projects to extend standard agent roles
-- [ ] **Workflow Extensions:** Enable custom workflows in `.agent-scope/workflows/`
+- [ ] **Workflow Extensions:** Enable custom workflows in `.agent/workflows/`
 - [ ] **Template Distribution:** Package and share templates across projects
 
 ---
@@ -160,10 +162,36 @@ This roadmap has been updated to reflect modern **Context Engineering** and **Sp
 
 **Goal:** Integrate with development environments and provide enhanced tooling.
 
+### Development Environment Setup
+
+- [x] **Environment Detection & Selection:** During `agent-scope init`, prompt user to select their preferred development environment
+- [x] **IDE Configuration Templates:** Maintain IDE-specific configuration templates for popular editors
+  - [x] VS Code (settings.json, extensions.json, launch.json, tasks.json)
+  - [x] Kiro IDE (project settings, agent configurations)
+  - [x] Cursor (AI-powered IDE configuration)
+  - [x] JetBrains IDEs (WebStorm, IntelliJ IDEA, PyCharm) - .idea/ folder structure
+  - [x] Sublime Text (project settings, build systems)
+  - [x] Atom (build configuration, legacy support)
+  - [x] Vim/Neovim (.vimrc, init.lua, plugin configurations)
+  - [x] Emacs (.emacs.d/, init.el configurations)
+  - [x] Nova (Panic Nova editor configuration)
+  - [x] Brackets (Adobe Brackets editor configuration)
+- [x] **AI Tools Integration:** Support for popular AI development tools
+  - [x] **Windsurf:** Creates `.windsurf/` directory with copies of `.agent/` content (agents, rules, workflows)
+  - [x] **Universal AGENTS.md:** Creates `.agent/` directory for any AI tool supporting AGENTS.md format
+  - [x] Simplified setup: Only Windsurf and Universal AGENTS.md available during init
+  - [x] `.agent/` directory created only when Universal AGENTS.md is selected
+  - [x] Windsurf receives full agent scope context (agents/, rules/, workflows/)
+- [x] **Automatic Configuration Copy:** Copy selected IDE and AI tool configurations to project during initialization
+- [x] **Multi-Environment Support:** Allow selection of multiple IDEs and AI tools for team environments
+- [x] **Configuration Validation:** Verify copied configurations are valid for the target environment
+- [x] **Update Command:** `agent-scope env update` to refresh all environment configurations after template changes
+
 ### IDE Integration
 
 - [ ] **VS Code Extension:** Sidebar for task tracking, plan approval, and hook notifications.
 - [ ] **JSON-RPC Protocol:** Standardize communication between CLI and IDE plugins.
+- [ ] **IDE-Specific Plugins:** Support for popular development environments beyond VS Code
 
 ---
 

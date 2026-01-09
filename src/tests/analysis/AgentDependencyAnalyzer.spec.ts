@@ -6,7 +6,7 @@ jest.mock('fs');
 describe('AgentDependencyAnalyzer', () => {
   const mockedFs = fs as jest.Mocked<typeof fs>;
   let analyzer: AgentDependencyAnalyzer;
-  const testWorkflowsDir = '.agent-scope/workflows';
+  const testWorkflowsDir = '.agent/workflows';
 
   beforeEach(() => {
     analyzer = new AgentDependencyAnalyzer(testWorkflowsDir);

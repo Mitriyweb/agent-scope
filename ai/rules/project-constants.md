@@ -8,9 +8,6 @@ This file defines key constants and standards used across all project rules.
 
 - **Minimum threshold**: 85% for all metrics (lines, functions, branches, statements)
 - **Non-negotiable**: Coverage cannot be lowered below 85% under any circumstances
-- **Baseline file**: `coverage-baseline.json`
-- **Check command**: `npm run coverage:check`
-- **Save command**: `npm run coverage:save`
 
 ## Test Structure Standards
 
@@ -94,7 +91,7 @@ tests/               # Test files (mirrors src/ structure)
 ```bash
 # Full quality check (run before commit)
 npm run build
-npm run test:coverage
+npm run test
 npm run lint
 npm run knip
 npm audit --audit-level=moderate
@@ -106,6 +103,4 @@ npm audit --audit-level=moderate
 npm run format        # Prettier formatting
 npm run lint:md      # Markdown linting
 npm run lint:js      # ESLint for TypeScript
-npm run coverage:check # Verify coverage baseline
-npm run coverage:save  # Update coverage baseline
 ```

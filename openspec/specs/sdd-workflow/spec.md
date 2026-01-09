@@ -48,7 +48,7 @@ The `agent-scope init` command SHALL create the agent configuration structure an
 #### Scenario: Successful initialization
 
 - **WHEN** running `agent-scope init` in a project directory
-- **THEN** the system SHALL create `.agent-scope/agents/` and `.agent-scope/workflows/` directories with default files
+- **THEN** the system SHALL create `.agent/agents/` and `.agent/workflows/` directories with default files
 
 #### Scenario: OpenSpec not installed
 
@@ -57,22 +57,22 @@ The `agent-scope init` command SHALL create the agent configuration structure an
 
 #### Scenario: Already initialized
 
-- **WHEN** running `agent-scope init` and `.agent-scope/` already exists
+- **WHEN** running `agent-scope init` and `.agent/` already exists
 - **THEN** the system SHALL prompt user to confirm overwrite or skip
 
 ### Requirement: Agent Registry Management
 
-The system SHALL maintain an agent registry in `.agent-scope/agents/` with agent role definitions.
+The system SHALL maintain an agent registry in `.agent/agents/` with agent role definitions.
 
 #### Scenario: List agents
 
 - **WHEN** running `agent-scope agent list`
-- **THEN** the system SHALL display all agent files from `.agent-scope/agents/`
+- **THEN** the system SHALL display all agent files from `.agent/agents/`
 
 #### Scenario: Add new agent
 
 - **WHEN** running `agent-scope agent add security-auditor`
-- **THEN** the system SHALL create `.agent-scope/agents/security-auditor.md` with template structure
+- **THEN** the system SHALL create `.agent/agents/security-auditor.md` with template structure
 
 #### Scenario: Validate agent definitions
 
@@ -86,7 +86,7 @@ The `agent-scope agent remove` command SHALL check workflow dependencies before 
 #### Scenario: Agent used in workflows
 
 - **WHEN** running `agent-scope agent remove architect`
-- **AND** workflows in `.agent-scope/workflows/` reference this agent
+- **AND** workflows in `.agent/workflows/` reference this agent
 - **THEN** the system SHALL display which workflows use the agent and prompt for confirmation
 
 #### Scenario: Agent not used
@@ -102,17 +102,17 @@ The `agent-scope agent remove` command SHALL check workflow dependencies before 
 
 ### Requirement: Workflow Management
 
-The system SHALL manage workflows in `.agent-scope/workflows/` that define agent sequences and orchestration.
+The system SHALL manage workflows in `.agent/workflows/` that define agent sequences and orchestration.
 
 #### Scenario: List workflows
 
 - **WHEN** running `agent-scope workflow list`
-- **THEN** the system SHALL display all workflow files from `.agent-scope/workflows/`
+- **THEN** the system SHALL display all workflow files from `.agent/workflows/`
 
 #### Scenario: Validate workflow
 
 - **WHEN** running `agent-scope workflow validate implement-feature`
-- **THEN** the system SHALL verify that all referenced agents exist in `.agent-scope/agents/`
+- **THEN** the system SHALL verify that all referenced agents exist in `.agent/agents/`
 
 #### Scenario: Run workflow
 
@@ -126,22 +126,22 @@ The `agent-scope init` command SHALL create four default agent definitions.
 #### Scenario: Architect agent created
 
 - **WHEN** `agent-scope init` completes
-- **THEN** `.agent-scope/agents/architect.md` SHALL exist with complete agent definition
+- **THEN** `.agent/agents/architect.md` SHALL exist with complete agent definition
 
 #### Scenario: Developer agent created
 
 - **WHEN** `agent-scope init` completes
-- **THEN** `.agent-scope/agents/developer.md` SHALL exist with complete agent definition
+- **THEN** `.agent/agents/developer.md` SHALL exist with complete agent definition
 
 #### Scenario: QA agent created
 
 - **WHEN** `agent-scope init` completes
-- **THEN** `.agent-scope/agents/qa.md` SHALL exist with complete agent definition
+- **THEN** `.agent/agents/qa.md` SHALL exist with complete agent definition
 
 #### Scenario: Reviewer agent created
 
 - **WHEN** `agent-scope init` completes
-- **THEN** `.agent-scope/agents/reviewer.md` SHALL exist with complete agent definition
+- **THEN** `.agent/agents/reviewer.md` SHALL exist with complete agent definition
 
 ### Requirement: Default Workflows Creation
 
@@ -150,12 +150,12 @@ The `agent-scope init` command SHALL create default workflow definitions that in
 #### Scenario: SDD cycle workflow created
 
 - **WHEN** `agent-scope init` completes
-- **THEN** `.agent-scope/workflows/sdd-cycle.md` SHALL exist defining the standard SDD workflow
+- **THEN** `.agent/workflows/sdd-cycle.md` SHALL exist defining the standard SDD workflow
 
 #### Scenario: Implement feature workflow created
 
 - **WHEN** `agent-scope init` completes
-- **THEN** `.agent-scope/workflows/implement-feature.md` SHALL exist with multi-agent orchestration
+- **THEN** `.agent/workflows/implement-feature.md` SHALL exist with multi-agent orchestration
 
 #### Scenario: Workflows reference OpenSpec
 

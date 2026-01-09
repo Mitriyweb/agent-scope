@@ -18,8 +18,8 @@ describe('AgentCommand', () => {
     }
     fs.mkdirSync(testDir, { recursive: true });
     process.chdir(testDir);
-    // Ensure .agent-scope exists for ConfigLoader
-    fs.mkdirSync(path.join(testDir, '.agent-scope'));
+    // Ensure .agent exists for ConfigLoader
+    fs.mkdirSync(path.join(testDir, '.agent'));
   });
 
   afterEach(() => {

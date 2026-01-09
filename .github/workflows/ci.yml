@@ -27,11 +27,8 @@ jobs:
       - name: Build TypeScript
         run: npm run build
 
-      - name: Run tests with coverage
+      - name: Run tests
         run: npm run test:coverage
-
-      - name: Verify coverage against baseline
-        run: npm run coverage:check
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3

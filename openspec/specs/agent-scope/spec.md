@@ -8,7 +8,7 @@ TBD - created by archiving change add-multi-agent-sdd-cycle. Update Purpose afte
 
 ### Requirement: Agent Definition Structure
 
-Agent definition files in `.agent-scope/agents/` SHALL follow a standardized markdown structure.
+Agent definition files in `.agent/agents/` SHALL follow a standardized markdown structure.
 
 #### Scenario: Required sections
 
@@ -27,7 +27,7 @@ Agent definition files in `.agent-scope/agents/` SHALL follow a standardized mar
 
 ### Requirement: Workflow Definition Structure
 
-Workflow definition files in `.agent-scope/workflows/` SHALL define agent sequences and orchestration rules.
+Workflow definition files in `.agent/workflows/` SHALL define agent sequences and orchestration rules.
 
 #### Scenario: Agent sequence definition
 
@@ -70,7 +70,7 @@ The system SHALL analyze which workflows depend on each agent.
 #### Scenario: Find agent usage
 
 - **WHEN** checking dependencies for an agent
-- **THEN** the system SHALL scan all workflow files in `.agent-scope/workflows/`
+- **THEN** the system SHALL scan all workflow files in `.agent/workflows/`
 
 #### Scenario: Display dependencies
 
@@ -103,12 +103,12 @@ The `agent-scope` CLI SHALL provide a hierarchical command structure for managin
 
 ### Requirement: Configuration Persistence
 
-The system SHALL persist agent and workflow configurations in the `.agent-scope/` directory.
+The system SHALL persist agent and workflow configurations in the `.agent/` directory.
 
 #### Scenario: Directory structure
 
 - **WHEN** `agent-scope init` completes
-- **THEN** the directory structure SHALL be: `.agent-scope/agents/` and `.agent-scope/workflows/`
+- **THEN** the directory structure SHALL be: `.agent/agents/` and `.agent/workflows/`
 
 #### Scenario: File format
 
@@ -117,5 +117,5 @@ The system SHALL persist agent and workflow configurations in the `.agent-scope/
 
 #### Scenario: Version control
 
-- **WHEN** `.agent-scope/` directory is created
+- **WHEN** `.agent/` directory is created
 - **THEN** all files SHALL be suitable for version control (no binary files)

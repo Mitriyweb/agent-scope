@@ -30,30 +30,32 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
 
 ### Phase 3 — Enhanced Specification & Design System
 
-- [ ] **[MEDIUM]** Implement Algorithm Specification Support
+- [x] **[MEDIUM]** Implement Algorithm Specification Support (Logic Flow)
   - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
   - **Roadmap Item**: Algorithm Specifications
   - **Effort**: M
-  - **Description**: As an architect, I want to describe algorithms in structured pseudocode, so that reviewers can validate logic without code knowledge
+  - **Description**: As an architect, I want to describe algorithms in structured pseudocode (Logic Flow), so that reviewers can validate logic without code knowledge
   - **Acceptance Criteria**:
-    - [ ] Add `ai/rules/algorithm-specs.md` with guidelines for writing pseudocode
-    - [ ] Support numbered pseudocode format in specification files
-    - [ ] Document language-agnostic description patterns
+    - [x] Add `ai/rules/algorithm-specs.md` with guidelines for writing pseudocode
+    - [x] Support numbered pseudocode format in specification files
+    - [x] Document Logic Flow specification in `requirements/LOGIC_FLOW.md`
   - **Dependencies**: None
   - **Created**: 2026-01-04
+  - **Completed**: 2026-01-09
 
-- [ ] **[HIGH]** Create Hierarchical Design Documentation Structure
+- [x] **[HIGH]** Create Hierarchical Design Documentation Structure
   - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
   - **Roadmap Item**: Hierarchical Design Documents
   - **Effort**: M
-  - **Description**: As a developer, I want system and feature-level architecture documentation, so that designs are clearly organized
+  - **Description**: As a developer, I want system and feature-level architecture documentation (Logic Flow-inspired), so that designs are clearly organized
   - **Acceptance Criteria**:
-    - [ ] Create `architecture/SYSTEM.md` for overall architecture
-    - [ ] Establish `architecture/features/{feature-name}/` structure
-    - [ ] Add support for Mermaid diagrams in `architecture/diagrams/`
-    - [ ] Link architecture docs with corresponding OpenSpec changes
+    - [x] Create `architecture/BUSINESS.md` for overall vision
+    - [x] Create `architecture/DESIGN.md` for overall architecture
+    - [x] Establish `architecture/features/{feature-name}/` structure
+    - [x] Create `architecture/features/FEATURES.md` feature manifest
   - **Dependencies**: None
   - **Created**: 2026-01-04
+  - **Completed**: 2026-01-09
 
 - [ ] **[MEDIUM]** Implement Command Interface Contract System
   - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
@@ -68,18 +70,31 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
   - **Dependencies**: None
   - **Created**: 2026-01-04
 
-- [ ] **[MEDIUM]** Create Architecture Validation Workflow
+- [x] **[MEDIUM]** Create Architecture Validation Workflows (Logic Flow-Style)
   - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
   - **Roadmap Item**: Architecture Validation
   - **Effort**: M
-  - **Description**: As an architect, I want automated architecture validation, so that designs are reviewed before implementation
+  - **Description**: As an architect, I want automated Logic Flow-style architecture validation, so that designs are reviewed before implementation
   - **Acceptance Criteria**:
-    - [ ] Create `ai/workflows/validate-architecture.md`
-    - [ ] Implement consistency checks between system and feature designs
-    - [ ] Add completeness gates for architecture documentation
-    - [ ] Support multi-agent review (architect → reviewer handoff)
+    - [x] Create `ai/workflows/business-validate.md`
+    - [x] Create `ai/workflows/design-validate.md`
+    - [x] Create `ai/workflows/features-validate.md`
+    - [x] Create `ai/workflows/feature-validate.md`
   - **Dependencies**: Hierarchical design documentation
   - **Created**: 2026-01-04
+  - **Completed**: 2026-01-09
+
+- [ ] **[MEDIUM]** Implement Architecture Consistency Checks
+  - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
+  - **Roadmap Item**: Architecture Validation
+  - **Effort**: M
+  - **Description**: Automated verification between system and feature designs
+  - **Acceptance Criteria**:
+    - [ ] Implement checks for type redefinitions across features
+    - [ ] Add completeness gates for architecture documentation
+    - [ ] Implement scoring system (90/100 threshold for design)
+  - **Dependencies**: Validation Workflows
+  - **Created**: 2026-01-09
 
 - [ ] **[LOW]** Implement Project Template Framework
   - **Roadmap Phase**: Phase 3 — Enhanced Specification & Design System
@@ -89,7 +104,7 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
   - **Acceptance Criteria**:
     - [ ] Create `templates/{language}/` directory structure
     - [ ] Support custom agent definitions per project
-    - [ ] Enable workflow extensions in `.agent-scope/workflows/`
+    - [ ] Enable workflow extensions in `.agent/workflows/`
     - [ ] Implement template packaging and distribution
   - **Dependencies**: None
   - **Created**: 2026-01-04
@@ -122,7 +137,7 @@ This document tracks the tactical, sprint-level work items for the **agent-scope
   - **OpenSpec Change**: add-multi-agent-sdd-cycle
   - **Created**: 2025-12-30
 
-- [ ] **[LOW]** Implement template build system
+- [ ] **[MEDIUM]** Implement template build system
   - **Roadmap Phase**: Phase 2 - Spec-Driven Development (SDD)
   - **Roadmap Item**: - [ ] **Template Build System:** Copy agent/workflow templates to dist/ for distribution
   - **Effort**: S

@@ -5,7 +5,7 @@ import * as path from 'path';
 
 describe('ConfigLoader', () => {
   const testDir = path.join(__dirname, 'test-config');
-  const agentScopeDir = path.join(testDir, '.agent-scope');
+  const agentScopeDir = path.join(testDir, '.agent');
   const agentsYamlPath = path.join(agentScopeDir, 'agents.yaml');
   const agentsMdPath = path.join(agentScopeDir, 'AGENTS.md');
 

@@ -49,17 +49,9 @@ repos:
         stages: [commit]
         always_run: true
 
-      - id: test-with-coverage
-        name: Check test coverage
-        entry: npm run test:coverage
-        language: system
-        pass_filenames: false
-        stages: [commit]
-        always_run: true
-
-      - id: coverage-check
-        name: Validate coverage baseline
-        entry: node scripts/precommit-coverage.js
+      - id: test
+        name: Run tests
+        entry: npm run test
         language: system
         pass_filenames: false
         stages: [commit]

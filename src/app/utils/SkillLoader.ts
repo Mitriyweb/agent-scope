@@ -7,7 +7,7 @@ export class SkillLoader {
   private skillsDir: string;
 
   constructor(baseDir: string = process.cwd()) {
-    this.skillsDir = path.join(baseDir, '.agent-scope', 'skills');
+    this.skillsDir = path.join(baseDir, '.agent', 'skills');
   }
 
   listSkills(): Skill[] {

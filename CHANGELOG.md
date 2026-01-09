@@ -38,11 +38,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Features
 
 - Agent memory and skills (Phase 1)
-- `agent-scope init`: Initialize project with `.agent-scope/` and `AGENTS.md`
+- `agent-scope init`: Initialize project with `.agent/` and `AGENTS.md`
 - `agent-scope agent add/list`: Manage agent configurations in `agents.yaml`
 - `agent-scope skill add`: Create reusable skill templates
 - Robust `AGENTS.md` merging with managed blocks (`<!-- OPENSPEC:START -->` or `<!-- AGENT-SCOPE:START -->`)
-- Automatic migration of legacy `ai/` and `AGENTS.md` files to `.agent-scope/`
+- Automatic migration of legacy `ai/` and `AGENTS.md` files to `.agent/`
 - OpenSpec alignment for agent instructions
 - Skill architecture with lazy loading support (Level 1 & 2)
 

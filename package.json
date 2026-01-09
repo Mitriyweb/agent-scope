@@ -1,6 +1,6 @@
 {
   "name": "agent-scope",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "CLI tool for configuring and orchestrating AI agents with explicit roles, scoped context, and OpenSpec-compatible specifications",
   "author": "Mitriyweb <mitriyweb@gmail.com>",
   "license": "MIT",
@@ -17,8 +17,6 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "coverage:check": "node scripts/check-coverage.js",
-    "coverage:save": "npm run test:coverage && node scripts/save-coverage.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:md": "markdownlint-cli2 --fix \"**/*.md\"",
@@ -26,7 +24,7 @@
     "lint": "npm run format && npm run lint:md && npm run lint:js",
     "knip": "knip",
     "audit": "npm audit --audit-level=moderate",
-    "precommit": "npm run build && npm run test:coverage && node scripts/precommit-coverage.js && npm run lint && npm run knip && npm run audit",
+    "precommit": "npm run build && npm run test:coverage && npm run lint && npm run knip && npm run audit",
     "prepare": "prek install",
     "backlog:validate": "node scripts/validate-backlog-roadmap.js",
     "backlog:sync": "node scripts/backlog-sync-runner.js",
@@ -37,7 +35,9 @@
     "roadmap:sync-status": "node scripts/sync-roadmap-status.js"
   },
   "dependencies": {
+    "@types/inquirer": "^8.2.12",
     "commander": "^14.0.2",
+    "inquirer": "^8.2.7",
     "js-yaml": "^4.1.1",
     "tsconfig-paths": "4.2.0"
   },

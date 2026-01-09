@@ -8,7 +8,7 @@ export class ConfigLoader {
   private configPath: string;
 
   constructor(baseDir: string = process.cwd()) {
-    this.configPath = path.join(baseDir, '.agent-scope', 'agents.yaml');
+    this.configPath = path.join(baseDir, '.agent', 'agents.yaml');
   }
 
   loadAgents(): AgentConfig[] {

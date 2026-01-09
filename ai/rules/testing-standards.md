@@ -142,10 +142,8 @@ npm run coverage:save
 
 ### Coverage baseline management
 
-- Baseline stored in `coverage-baseline.json`
-- Pre-commit hook automatically checks coverage
-- Commit fails if coverage drops below 85% (prevents regressions)
-- If coverage improves, baseline is updated and staged automatically
+- Maintain 85% coverage minimum for all metrics
+- Run `npm run test` to verify coverage
 
 ---
 

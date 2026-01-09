@@ -56,7 +56,7 @@ Build output (packaged with app):
 └── workflows/                  # Copied from ai/workflows/
 
 User project (created by init):
-.agent-scope/
+.agent/
 ├── agents/                     # Copied from dist/templates/agents/
 └── workflows/                  # Copied from dist/templates/workflows/
 ```
@@ -70,7 +70,7 @@ User project (created by init):
 agent-scope init
 ```
 
-Creates `.agent-scope/` directory structure and copies default agents and workflows from templates.
+Creates `.agent/` directory structure and copies default agents and workflows from templates.
 
 **Checks**:
 

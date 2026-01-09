@@ -7,6 +7,9 @@ import { PlanCommand } from '@/commands/PlanCommand';
 import { TasksCommand } from '@/commands/TasksCommand';
 import { ImplementCommand } from '@/commands/ImplementCommand';
 import { ValidateCommand } from '@/commands/ValidateCommand';
+import { EnvCommand } from '@/commands/EnvCommand';
+import { WorkflowCommand } from '@/commands/WorkflowCommand';
+import { ClearCommand } from '@/commands/ClearCommand';
 import { version } from '../../package.json';
 
 const program = new Command();
@@ -24,6 +27,9 @@ PlanCommand.register(program);
 TasksCommand.register(program);
 ImplementCommand.register(program);
 ValidateCommand.register(program);
+EnvCommand.register(program);
+WorkflowCommand.register(program);
+ClearCommand.register(program);
 
 // If being run directly
 if (require.main === module) {

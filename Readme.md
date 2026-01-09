@@ -141,39 +141,31 @@ Handoffs are **explicit and controlled**, never automatic.
 - **QA** — Writes and validates tests, ensures quality
 - **Reviewer** — Reviews code, specs, and tests for correctness
 
-### SDD Workflow
+### SDD Workflow (Logic Flow-Inspired)
 
-The SDD cycle follows this pattern:
+The project follows a structured, design-first development workflow with clear validation gates:
 
-1. **Architect** creates OpenSpec-compatible requirements and design
-2. **Developer** implements code based on the design
-3. **QA** writes tests and validates implementation
-4. **Reviewer** reviews all artifacts for consistency
+1. **Business Context**: Define "Why" and "Who" in `architecture/BUSINESS.md`.
+2. **Overall Design**: Define system architecture and domain models in `architecture/DESIGN.md`.
+3. **Feature Planning**: Decompose design into features in `architecture/features/FEATURES.md`.
+4. **Feature Design**: Define "What" and "How" for specific features in `architecture/features/feature-{slug}/DESIGN.md`. All logic uses **Logic Flow** (Plain English Logic).
+5. **Implementation**: Execute specific tasks with targeted, isolated context.
 
-Each agent has:
+### Key Concepts
 
-- Defined responsibilities and constraints
-- Clear input/output contracts
-- Success criteria for their work
+#### Design Hierarchy
 
-### Agent Definitions
+- **BUSINESS.md**: Project vision, actors, and core capabilities.
+- **DESIGN.md**: Multi-layered technical architecture and machine-readable domain models.
+- **FEATURES.md**: Manifest tracking the status and dependencies of all system features.
 
-Agent definitions are stored in `ai/agents/` and include:
+#### Logic Flow (Plain English Logic)
 
-- Purpose and scope
-- Responsibilities
-- Constraints and limitations
-- Input/output contracts
-- Success criteria
+Standardized, plain English pseudocode for documenting algorithms and actor flows. **Code is prohibited in design documents** to ensure logical correctness can be reviewed by any stakeholder.
 
-### Workflow Orchestration
+#### Validation Gates
 
-Workflows are defined in `ai/workflows/` and specify:
-
-- Agent execution sequence
-- Approval gates between agents
-- Context handoff rules
-- Integration with OpenSpec
+Automated workflows ensure every design artifact meets structural and logical standards before implementation begins.
 
 Example workflows:
 
@@ -200,7 +192,7 @@ Each agent operates **only within its own scope** and against **explicit OpenSpe
 agent-scope init
 ```
 
-This creates the `.agent-scope/` directory and an `AGENTS.md` file (which is also linked to `openspec/AGENTS.md` if the project uses OpenSpec).
+This creates the `.agent/` directory and an `AGENTS.md` file (which is also linked to `openspec/AGENTS.md` if the project uses OpenSpec).
 
 ### Manage Agents
 
@@ -222,14 +214,72 @@ agent-scope agent add "Coder" \
 agent-scope skill add "SecurityAudit"
 ```
 
+### Development Environment Setup
+
+`agent-scope` can automatically configure your IDE and AI development tools during project initialization:
+
+```bash
+agent-scope init
+```
+
+**Supported IDE/AI Tools:**
+
+- **Windsurf** — Creates `.windsurf/` directory with copies of agents, rules, and workflows from `.agent/`
+- **Universal agent** — Creates `.agent/` directory for any AI tool supporting AGENTS.md format
+
+**Windsurf Integration:**
+
+When Windsurf is selected, `agent-scope`:
+
+1. Creates `.agent/` directory with:
+   - `agents/` — Agent definitions
+   - `rules/` — Project-specific rules
+   - `workflows/` — Development workflows
+   - `AGENTS.md` — Agent instructions
+2. Copies all content from `.agent/` to `.windsurf/`
+3. Removes `.agent/` if Universal agent is not selected (Windsurf has its own copy)
+
+This allows Windsurf to access all project-specific configurations seamlessly.
+
+**Universal Agent Integration:**
+
+When Universal agent is selected, `agent-scope` creates:
+
+- `.agent/` directory with:
+  - `AGENTS.md` — Agent instructions
+  - `agents/` — Agent definitions
+  - `rules/` — Project-specific rules
+  - `workflows/` — Development workflows
+
+**Combined Selection:**
+
+When both Windsurf and Universal agent are selected:
+
+- `.windsurf/` directory is created with copies of all `.agent/` content
+- `.agent/` directory persists for Universal agent to use
+
+**Update Environment:**
+
+```bash
+# Update IDE and AI tool configurations
+agent-scope env update
+```
+
+**Clear Environment:**
+
+```bash
+# Remove .agent and .windsurf directories
+agent-scope clear
+```
+
 ---
 
 ## Project configuration
 
-Configuration is stored in the `.agent-scope/` directory:
+Configuration is stored in the `.agent/` directory:
 
 ```text
-.agent-scope/
+.agent/
   agents.yaml   # Agent definitions
   AGENTS.md     # Project-level agent instructions
   skills/       # Reusable skill markdown files

@@ -10,7 +10,7 @@ export class SkillCommand {
       .command('add <name>')
       .description('Create a new skill')
       .action(name => {
-        const skillsDir = path.join(process.cwd(), '.agent-scope', 'skills');
+        const skillsDir = path.join(process.cwd(), '.agent', 'skills');
         if (!fs.existsSync(skillsDir)) {
           fs.mkdirSync(skillsDir, { recursive: true });
         }

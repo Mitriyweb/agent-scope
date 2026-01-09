@@ -8,7 +8,7 @@ import type { WorkflowDependency } from '@/types/AgentScope';
 export class AgentDependencyAnalyzer {
   private workflowsDir: string;
 
-  constructor(workflowsDir: string = '.agent-scope/workflows') {
+  constructor(workflowsDir: string = '.agent/workflows') {
     this.workflowsDir = workflowsDir;
   }
 

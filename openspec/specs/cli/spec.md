@@ -13,7 +13,7 @@ The CLI SHALL provide an initialization command.
 #### Scenario: Init Project
 
 - **WHEN** `agent-scope init` is executed
-- **THEN** an `.agent-scope/` directory SHALL be created
+- **THEN** an `.agent/` directory SHALL be created
 - **AND** a default `AGENTS.md` file SHALL be created
 
 ### Requirement: Agent Management
@@ -37,4 +37,4 @@ The CLI SHALL provide commands to manage skills.
 #### Scenario: Add Skill
 
 - **WHEN** `agent-scope skill add <name>` is executed
-- **THEN** a new skill template file SHALL be created in `.agent-scope/skills/`
+- **THEN** a new skill template file SHALL be created in `.agent/skills/`

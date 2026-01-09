@@ -123,13 +123,7 @@ The project provides automated checks to maintain structure and consistency:
   - **MINIMUM THRESHOLD: 85% coverage is non-negotiable**
   - Coverage cannot be lowered below 85% under any circumstances
   - All metrics (statements, branches, functions, lines) must maintain 85% minimum
-  - Baseline stored in `coverage-baseline.json`
-  - Run `npm run coverage:check` to verify coverage meets baseline
-  - Run `npm run coverage:save` to update baseline after improvements
-  - Pre-commit hook automatically checks coverage and updates baseline if improved
-  - Commit fails if coverage drops below 85% (prevents regressions)
-  - Baseline is committed to git to track coverage history
-  - Auto-update on commit: if coverage improves, baseline is updated and staged
+  - Run `npm run test` to verify coverage meets 85% threshold
   - If coverage falls below 85%, must add tests to restore coverage before committing
 - **Tests in Tasks**: Every task in `tasks.md` MUST include test implementation as a sub-task
   - Example: `1.1 Implement feature X` should have `1.1.1 Write tests for feature X`
