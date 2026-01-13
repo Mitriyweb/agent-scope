@@ -2,6 +2,8 @@
 description: Synchronize BACKLOG.md with GitHub issues and ROADMAP.md
 ---
 
+1. Execute [workflows/init-workflow.md](init-workflow.md)
+
 # Backlog Sync Workflow
 
 ## Overview

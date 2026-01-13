@@ -1,3 +1,5 @@
+1. Execute [workflows/init-workflow.md](init-workflow.md)
+
 # Workflow: Validate Features Manifest
 
 ## Purpose

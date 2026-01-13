@@ -2,6 +2,8 @@
 description: Standard development cycle via specifications, planning, and tasks (SDD).
 ---
 
+1. Execute [workflows/init-workflow.md](init-workflow.md)
+
 # SDD Lifecycle Workflow
 
 This workflow is mandatory for any non-trivial development task.

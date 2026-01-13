@@ -2,6 +2,8 @@
 description: Implement a feature from the roadmap or backlog using OpenSpec.
 ---
 
+1. Execute [workflows/init-workflow.md](init-workflow.md)
+
 # Implement Feature Workflow
 
 Use this workflow to implement a specific feature identified by name or number from the roadmap or backlog.

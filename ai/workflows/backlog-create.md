@@ -2,6 +2,8 @@
 description: Create new backlog items and convert them to OpenSpec change proposals.
 ---
 
+1. Execute [workflows/init-workflow.md](init-workflow.md)
+
 # Backlog Create Workflow
 
 ## Overview

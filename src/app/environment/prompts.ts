@@ -11,16 +11,20 @@ export class EnvironmentPrompts {
    */
   static async promptForEnvironmentSelection(
     _availableIDEs: IDEConfig[],
-    availableAITools: AIToolConfig[]
+    availableAITools: AIToolConfig[],
+    existingAIToolIds: string[] = []
   ): Promise<EnvironmentSelection | null> {
     console.log('\n🚀 Development Environment Setup');
 
     // Create choices array with only AI tools
-    const choices = availableAITools.map(tool => ({
-      name: tool.name + (tool.requiresApiKey ? ' ⚠️' : ''),
-      value: `ai:${tool.id}`,
-      checked: false,
-    }));
+    const choices = availableAITools.map(tool => {
+      const exists = existingAIToolIds.includes(tool.id);
+      return {
+        name: tool.name + (tool.requiresApiKey ? ' ⚠️' : '') + (exists ? ' (exists)' : ''),
+        value: `ai:${tool.id}`,
+        checked: false,
+      };
+    });
 
     const answers = await inquirer.prompt([
       {

@@ -185,9 +185,12 @@ You are a QA engineer. You test the code.
   private static async setupDevelopmentEnvironment(projectPath: string): Promise<void> {
     const options = EnvironmentSetup.getAvailableOptions();
 
+    const existing = EnvironmentSetup.detectExisting(projectPath);
+
     const selection = await EnvironmentPrompts.promptForEnvironmentSelection(
       options.ides,
-      options.aiTools
+      options.aiTools,
+      existing.aiTools
     );
 
     if (selection) {
