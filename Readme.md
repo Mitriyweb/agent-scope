@@ -1,5 +1,9 @@
 # agent-scope
 
+> The control plane for multi-agent AI development. Scoped context, explicit roles, and spec-driven workflows.
+
+`ai-agents`, `orchestration`, `spec-driven-development`, `cli`, `typescript`, `workflow-automation`, `openspec`
+
 CLI tool for configuring and orchestrating AI agents in software projects.
 
 `agent-scope` allows you to define AI agent roles (architect, developer, qa, reviewer), strictly limit their context, and explicitly control how context is passed between agents within a project.

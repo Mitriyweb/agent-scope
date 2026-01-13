@@ -1,7 +1,7 @@
 {
   "name": "agent-scope",
   "version": "0.5.0",
-  "description": "CLI tool for configuring and orchestrating AI agents with explicit roles, scoped context, and OpenSpec-compatible specifications",
+  "description": "The control plane for multi-agent AI development. Scoped context, explicit roles, and spec-driven workflows.",
   "author": "Mitriyweb <mitriyweb@gmail.com>",
   "license": "MIT",
   "repository": {
